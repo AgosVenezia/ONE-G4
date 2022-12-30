@@ -1,0 +1,155 @@
+<meta charset="UTF-8">
+
+HTML
+<br>
+La edad de Christian es...
+<br>
+?
+
+<br>
+<br>
+
+JavaScript
+<br>
+
+<script>
+	document.write("<h5>La edad de Christian es...</h1>")
+    document.write("<br>")
+    document.write("?")
+    document.write("<br>")
+    document.write(25)
+    document.write("<br>")
+    document.write(25+8)
+    document.write("<br>")
+    document.write(100/4)
+    document.write("<br>")
+    document.write("20" + 15)
+</script>
+<br>
+<br>
+<script>
+	document.write("El año de nacimiento de Christian es...")
+    document.write("<br>")
+    document.write("2020-29")
+    document.write("<br>")
+    document.write(2020-29)
+    document.write("<br>")
+    document.write("El promedio de edad de Juan, Pedro y Carlos es...")
+    document.write("<br>")
+    document.write(20+25+15/3)
+    document.write("<br>")
+    document.write((20+25+15)/3)
+</script>
+<br>
+<br>
+<script>
+	document.write("La suma de las edades de Juan, Pedro y Carlos es..." + 20+25+15);
+    document.write("<br>")
+    document.write("La suma de las edades de Juan, Pedro y Carlos es..." + (20+25+15));
+    document.write("<br>")
+    document.write("La suma de las edades de Juan, Pedro y Carlos es...<br>" + (20+25+15));
+</script>
+<br>
+<br>
+<h4>RECOMENDADO</h4>
+<script>
+	document.write("La suma de las edades de Juan, Pedro y Carlos es...");
+    document.write("<br>")
+    document.write((20+25+15));
+    document.write("<br>")
+    document.write("<br>")
+    document.write("Juan nació en el año...");
+    document.write("<br>")
+    document.write(2020-20);
+    document.write("<br>")
+    document.write("<br>")
+    document.write("Pedro nació en el año...");
+    document.write("<br>")
+    document.write(2020-25);
+    document.write("<br>")
+    document.write("<br>")
+    document.write("Carlos nació en el año...");
+    document.write("<br>")
+    document.write(2020-15);
+</script>
+<br>
+<br>
+<h4>REVERSA</h4>
+<script>
+    document.write("Juan tiene: " + (2020-2000) + " años");
+    document.write("<br>")
+    document.write("<br>")
+    document.write("Pedro tiene: " + (2020-1995) + " años");
+    document.write("<br>")
+    document.write("<br>")
+    document.write("Carlos tiene: " + (2020-2005) + " años");
+    document.write("<br>")
+    document.write("<br>")
+</script>
+<br>
+<br>
+<h1>PROGRAMA</h1>
+<script>
+
+    var anho = 2020;
+
+    document.write("Juan tiene: " + (anho-2000) + " años");
+    document.write("<br>")
+    document.write("<br>")
+    document.write("Pedro tiene: " + (anho-1995) + " años");
+
+    anho = 2030
+
+    document.write("<br>")
+    document.write("<br>")
+    document.write("Carlos tiene: " + (anho-2005) + " años");
+    document.write("<br>")
+    document.write("<br>")
+    document.write("<br>")
+    document.write("<br>")
+
+    function saltarLinea() {
+        document.write("<br>");
+        document.write("<br>");
+    }
+
+    function imprimir(frase) {
+        document.write(frase);
+        saltarLinea();
+    }
+    
+    var anho = 2020;
+    var saltoLinea = "<br><br>";
+
+    imprimir("Hola amigos!")
+
+    //Este código calcula las edades de Jimena, Paola y Laura
+    imprimir("Jimena tiene: " + (anho-2010) + " años");
+    document.write("Paola tiene: " + (anho-1995) + " años");
+    document.write(saltoLinea);
+    document.write("Laura tiene: " + (anho-2005) + " años");
+    document.write(saltoLinea);
+    document.write("El promedio de las edades de las tres mujeres es: " + (10+25+15)/3);
+    saltarLinea();
+
+    promedio = (10+25+15)/3
+    document.write("El promedio de las edades de las tres mujeres es: " + promedio);
+    document.write("<br>")
+    document.write("El promedio de las edades de las tres mujeres es: " + Math.round(promedio));
+    document.write("<br>")
+
+    
+    var edadJimena = 10
+    var edadPaola= 25
+    var edadLaura =  15
+
+    var nombre1 = "Jimena";
+    var nombre2 = "Paola";
+    var nombre3 = "Laura";
+    
+    promedio = (edadJimena+edadPaola+edadLaura)/3
+    document.write("El promedio de las edades de las tres mujeres es: " + Math.round(promedio));
+    document.write("<br>")
+    document.write("El promedio de las edades de " + nombre1 + ", " + nombre2 + " y " + nombre3 + " es: " + Math.round(promedio));
+    document.write("<br>")
+</script>

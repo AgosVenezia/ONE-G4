@@ -1,0 +1,63 @@
+¿Qué tal una revisión práctica? Cree un archivo imprimir_edades2.html. Al inicio vamos a insertar la definición de las funciones. Comenzamos con saltarLinea. <br>
+
+Abajo vamos a tener la segunda función, imprimir, que a su vez usa saltarLinea. Diferente de la anterior, esta segunda recibe un parámetro, que será la frase presentada en el navegador. <br>
+
+Recuerda colocar el código dentro de la función, con una indentación (del inglés indent) siempre más a la derecha y utiliza la tecla TAB de tu teclado para crear esta indentación. Es importante que la indentación esté de forma correcta para facilitar la lectura del programa.
+
+Después de las dos funciones declaradas, utilizaremos los códigos para imprimir cuantos años tiene cada uno de los involucrados. <br>
+
+Hagamos algunos ajustes basados en el código anterior. <br>
+
+1.- ¡Altera la función saltarLinea para que salte cinco líneas! Es decir, hacer cinco brs. <br>
+
+2.- Realiza una etiqueta HTML, será bastante útil para separar un resultado de otro: hr. Altera la función saltarLinea() para que esta escriba en el navegador un hr después del tercer br que ya hicimos. <br>
+
+3.- La fuente de nuestro programa puede que aún no sea la adecuada. Hay una etiqueta HTML que se llama <big>. Haz que la función imprimir coloque la frase entre <big> y </big>. <br>
+
+4.- ¿Qué pasa si te olvidas la palabra function a la hora de declarar una de las funciones? ¿Y los paréntesis en la declaración de la función saltarLinea? <br>
+
+<meta charset="UTF-8">
+<h1>PROGRAMA</h1>
+<script>
+    function saltarLinea() {
+        document.write("<br>");    
+        document.write("<br>");    
+        document.write("<br>");    
+    }  
+    function imprimir(frase) {
+        document.write(frase);
+        saltarLinea();
+    }
+    var anho = 2025;
+    imprimir("hola amigos");
+    // este código calcula las edades de Juan, Pedro y Carlos
+    imprimir("Juan tiene: " + (anho-2000) + " años");
+    imprimir("Pedro tiene: " + (anho-1995) + " años");
+    anho = 2030
+    imprimir("Carlos tiene: " + (anho-2005) + " años");
+</script>
+
+<script>
+
+function saltarLinea2() {
+     // saltando cinco lineas
+    document.write("<br>");    
+    document.write("<br>");    
+    document.write("<br>");
+    document.write("<hr>");    
+    document.write("<br>");    
+    document.write("<br>");
+}
+
+function imprimir2(frase2) {
+    document.write("<big>" + frase2 + "</big>");
+    saltarLinea2();
+}
+var anho = 2030;
+    imprimir2("hola amigos");
+    // este código calcula las edades de Juan, Pedro y Carlos
+    imprimir2("Juan tiene: " + (anho-2000) + " años");
+    imprimir2("Pedro tiene: " + (anho-1995) + " años");
+    anho = 2030
+    imprimir2("Carlos tiene: " + (anho-2005) + " años");
+</script>
