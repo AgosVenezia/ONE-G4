@@ -1,0 +1,55 @@
+<meta charset="UTF-8">
+
+<h1>PROGRAMA - CALCULAR LA TABLA DE MULTIPLICAR </h1>
+
+<script>
+
+	function saltarLinea() {
+
+		document.write("<br>");	
+		document.write("<br>");	
+		document.write("<br>");	
+
+	}  
+
+	function imprimir(frase) {
+
+		document.write(frase);
+		saltarLinea();
+
+	}
+
+
+	var multiplicador = 1
+
+	imprimir("WHILE");
+
+	while (multiplicador <= 10) {
+
+		imprimir(7 * multiplicador);
+		//multiplicador = multiplicador + 1;
+		multiplicador++;
+		
+	}
+
+//número * multiplicador = 7*1 = 7
+//multiplicador = multiplicador + 1 = 2
+//número * multiplicador = 7*2 = 14
+//multiplicador = multiplicador + 1 = 3
+//número * multiplicador = 7*3 = 21
+
+	
+
+	imprimir("FOR");
+	
+	for (var multiplicador = 1;multiplicador <= 10;multiplicador++) {
+
+		imprimir(7 * multiplicador);
+
+
+	}
+
+
+</script>
+
+
