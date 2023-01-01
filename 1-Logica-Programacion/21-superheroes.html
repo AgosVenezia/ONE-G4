@@ -1,0 +1,38 @@
+<!-- 
+En la prueba de estructura de datos, Felipe tenía la siguiente lista:
+
+var heroes = ["Superman", "Thor", "Batman", "Mujer Maravilla"];
+
+El ejercicio pidió que mostrara un alert para cada ítem de la lista y lo implementó de la siguiente manera:
+
+for( var i = 1; i < heroes.length; i++) {
+    alert(heroes[i]);
+}
+
+A pesar de creer que su código es correcto, obtuvo un 7/10 porque cometió un error. Su maestro dijo que mostraba todos los nombres excepto "Superman".
+
+¿Cuál es el problema con el código de Felipe? ¿Cómo puede cambiarlo para que muestre todos los nombres en la lista sin omitir ninguno?
+
+Veamos el código de Felipe:
+
+var heroes = ["Superman", "Thor", "Batman", "Mujer Maravilla"];
+for( var i = 1; i < heroes.length; i++) {
+    alert(heroes[i]);
+}
+
+Nota que la variable de incremento i comienza con el valor de 1, pero debería ser 0. Ya que nuestra variable de incremento se utiliza como índice para acceder a cada elemento de la lista, el primer elemento de todo array tiene un índice 0. ¡Por eso "Superman" se quedó fuera!
+
+La forma correcta del código sería:
+
+var heroes = ["Superman", "Thor", "Batman", "Mujer Maravilla"];
+for( var i = 0; i < heroes.length; i++) {
+    alert(heroes[i]);
+}
+-->
+
+<script>
+    var heroes = ["Superman", "Thor", "Batman", "Mujer Maravilla"];
+    for( var i = 0; i < heroes.length; i++) {
+    alert(heroes[i]);
+    }
+</script>

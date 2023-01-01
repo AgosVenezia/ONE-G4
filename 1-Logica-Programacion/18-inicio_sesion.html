@@ -1,0 +1,95 @@
+<!-- 
+Es común que los programas tengan una pantalla de inicio de sesión, es decir, la pantalla que identifica al usuario en el sistema. Para permitir el acceso, el nombre de usuario y la contraseña deben coincidir con los valores almacenados por la aplicación, independientemente de dónde se guardó la información. Tampoco es raro permitir un máximo de tres intentos y después del tercero, el sistema se niega a identificar al usuario y notifica al administrador del sistema o incluso al propietario de la cuenta.
+
+Aquí está el código que inicia sesión, pero ATENCIÓN, solo le da una oportunidad al usuario:
+
+<meta charset="UTF-8">
+<script>
+
+    var inicioDeSesionRegistrado = "alura";
+    var contrasenhaRegistrada = "alura321";
+
+    var inicioDeSesionIngresado = prompt("Ingrese su usuario");
+    var contrasenhaIngresada = prompt("Ingrese su contraseña");
+
+    if( inicioDeSesionRegistrado == inicioDeSesionIngresado && contrasenhaRegistrada == contrasenhaIngresada ) {
+        alert("Bienvenido al sistema " + inicioDeSesionIngresado);
+    } else {
+        alert("inicio de sesión inválido. Favor intente de nuevo");
+    }
+</script>
+
+Cambia el código anterior para que el usuario tenga 3 intentos de inicio de sesión. Atención: si lo hace bien en el primer intento, no tiene sentido seguir preguntando por su nombre de usuario y contraseña.
+
+¡Aquí hay una solución!
+
+Vamos a crear una variable de incremento llamada intentoActual y vamos asignarle el valor de 1 para inicializar, y una variable con el límite de intentos llamada maximoIntentos que asignaremos el valor de 3.
+
+Luego creamos un Loop usando while, donde vamos a usar la condición de que vamos a ejecutar el while mientras intentoActual sea menor o igual maximoIntentos, si el usuario pasa de los 3 intentos debemos informar al usuario que agotó el número de intentos.
+
+<meta charset="UTF-8">
+
+<script>
+
+    var inicioDeSesionRegistrado = "alura";
+    var contrasenhaRegistrada = "alura321";
+
+    var maximoIntentos = 3;
+    var intentoActual = 1;
+
+    while(intentoActual <= maximoIntentos){
+        var inicioDeSesionIngresado = prompt("Ingrese su usuario");
+        var contrasenhaIngresada = prompt("Ingrese su contraseña");
+
+        if(inicioDeSesionRegistrado == inicioDeSesionIngresado && contrasenhaRegistrada == contrasenhaIngresada){
+            alert("Bienvenido al sistema" + inicioDeSesionIngresado);
+            intentoActual = maximoIntentos; // Lo hice bien, así que paso todos los intentos que falten y salgo del loop. Allá abajo aumentará +1! 
+        } else {
+            if (intentoActual == 3) {
+                alert("Agotaste el número permitido de intentos!");
+            } else {
+                alert("Inicio de sesión inválido. Favor intente de nuevo");
+            }
+        }
+
+       // vaya al próximo intento 
+        intentoActual = intentoActual +1  
+    }
+
+</script>
+
+En vez de usar intentoActual = intentoActual + 1 podemos usar intentoActual++ que es un atajo para cuando queremos incrementar una variable.
+
+Esto ni siquiera se acerca a la complejidad de crear un sistema de autenticación (inicio de sesión del usuario), pero experimentar con el tema, es sin duda un incentivo para continuar en el universo de la programación. ¡Sigue estudiando!
+-->
+
+<meta charset="UTF-8">
+
+<script>
+
+    var inicioDeSesionRegistrado = "alura";
+    var contrasenhaRegistrada = "alura321";
+
+    var maximoIntentos = 3;
+    var intentoActual = 1;
+
+    while(intentoActual <= maximoIntentos){
+        var inicioDeSesionIngresado = prompt("Ingrese su usuario");
+        var contrasenhaIngresada = prompt("Ingrese su contraseña");
+
+        if(inicioDeSesionRegistrado == inicioDeSesionIngresado && contrasenhaRegistrada == contrasenhaIngresada){
+            alert("Bienvenido al sistema" + inicioDeSesionIngresado);
+            intentoActual = maximoIntentos; // Lo hice bien, así que paso todos los intentos que falten y salgo del loop. Allá abajo aumentará +1! 
+        } else {
+            if (intentoActual == 3) {
+                alert("Agotaste el número permitido de intentos!");
+            } else {
+                alert("Inicio de sesión inválido. Favor intente de nuevo");
+            }
+        }
+
+       // vaya al próximo intento 
+        intentoActual = intentoActual +1  
+    }
+
+</script>

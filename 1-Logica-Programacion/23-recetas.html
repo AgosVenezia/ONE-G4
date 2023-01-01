@@ -1,0 +1,93 @@
+<!-- 
+Armando tuvo la idea de crear un programa para crear recetas. En él, hay una lista en la que el usuario puede agregar ingredientes. Observemos:
+
+<meta charset="UTF-8">
+
+<h1>Recetas de Armando</h1>
+
+<script>
+
+    var ingredientes = [];
+    var cantidad = parseInt(prompt("¿Cuántos ingredientes vas a añadir?"));
+    var contador = 1;
+
+    while( contador <= cantidad) {
+        var ingrediente = prompt("Informe el ingrediente " + contador);
+        ingredientes.push(ingrediente);
+        contador++;
+    }
+
+    console.log(ingredientes);
+
+</script>
+
+Al probar el código, descubrimos que funciona. El problema es que podemos agregar ingredientes repetidos a una lista de recetas. Cambia el código para que no se puedan agregar los ingredientes repetidos.
+
+Podrás encontrar la solución fácilmente haciendo clic en "Ver opinión del Instructor", pero primero intenta resolver el ejercicio por tu cuenta. Si tienes alguna pregunta, visita el foro.
+
+NOTA: No necesitas responder aquí, intenta resolver el problema en tu computadora y compara tu solución con el código que mostramos a continuación.
+
+Una forma de resolver es la siguiente:
+
+<meta charset="UTF-8">
+
+<h1>Recetas de Armando </h1>
+
+<script>
+
+  var ingredientes = [];
+  var cantidad = parseInt(prompt("¿Cuántos ingredientes vas a añadir?"));
+  var contador = 1;
+
+  while(contador <= cantidad) {
+    var ingrediente = prompt("Informe el ingrediente " + contador);
+    var existe = false;
+    for(var posicion = 0; posicion < ingredientes.length; posicion++) {
+      if(ingredientes[posicion] == ingrediente){
+        existe = true;
+    alert("repetido " + ingrediente);
+        break;
+      }
+     }
+     if(existe == false) {
+      ingredientes.push(ingrediente);
+      contador++;
+     }
+   }
+   console.log(ingredientes);
+</script>
+
+Antes de añadir un ingrediente al array, debemos verificar si se ha agregado antes. Por lo tanto, verificamos, para cada ingrediente agregado, si existe en la lista y si no, podemos agregarlo.
+
+Ten en cuenta que creamos una variable llamada existe, comienza con false y solo es verdadera si el elemento existe. Si esto sucede, no tiene sentido continuar escaneando el array y salimos del loop por medio del break, aprovechamos para informar al usuario con otro alert sobre el ingrediente repetido. El break rompe el for, al final, validamos la variable existe para ver si incluimos el ingrediente o no.
+
+Mucha atención, porque solo podemos aumentar la variable del contador cuando el ingrediente no existe. Esto es importante, ya que, si existe, debemos repetir la pregunta de nuevo ingrediente para el usuario.
+-->
+
+<meta charset="UTF-8">
+
+<h1>Recetas de Armando </h1>
+
+<script>
+
+  var ingredientes = [];
+  var cantidad = parseInt(prompt("¿Cuántos ingredientes vas a añadir?"));
+  var contador = 1;
+
+  while(contador <= cantidad) {
+    var ingrediente = prompt("Informe el ingrediente " + contador);
+    var existe = false;
+    for(var posicion = 0; posicion < ingredientes.length; posicion++) {
+      if(ingredientes[posicion] == ingrediente){
+        existe = true;
+    alert("repetido " + ingrediente);
+        break;
+      }
+     }
+     if(existe == false) {
+      ingredientes.push(ingrediente);
+      contador++;
+     }
+   }
+   console.log(ingredientes);
+</script>
