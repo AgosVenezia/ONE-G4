@@ -1,0 +1,213 @@
+<!-- 
+En esta aula aprendimos a animar un círculo que se movía de izquierda a derecha, hasta dejar el área visible del canvas, nuestra pantalla.
+
+Vamos a recordar nuestro código:
+
+<canvas width="600" height="400"> </canvas>
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");        
+    pincel.fillStyle = "lightgrey";
+    pincel.fillRect(0,0,600,400); 
+
+    function disenharCircunferencia(x,y,radio){
+        pincel.fillStyle = "blue";
+        pincel.beginPath();
+        pincel.arc(x,y,radio,0,2*Math.PI);
+        pincel.fill();
+    }    
+
+    function limpiarPantalla(){
+
+        pincel.clearRect(0,0,600,400);
+
+    }
+
+    var x = 0
+
+    function actualizarPantalla(){
+
+        limpiarPantalla();
+        disenharCircunferencia(x,20,10);
+        x++;
+    }
+
+    setInterval(actualizarPantalla,100);
+
+</script> 
+
+Altera el código para que el círculo ni bien llegue al extremo derecho de la pantalla vuelva en sentido contrario (de derecha a izquierda), y cuando retorne al lugar inicial (lado izquierdo), nuevamente se mueva de izquierda a derecha, y así sucesivamente, yendo y volviendo eternamente.
+
+Existen varias formas de conseguir ese resultado, así como todo en el universo de programación. El desafío se trata de que pienses y te esfuerces por resolver el problema, después puedes comparar tu resultado con una de las soluciones propuestas por el instructor en el botón Ver Opinión del Instructor.
+
+
+Para saber si el circulo va de izquierda a derecha o de derecha a izquierda, necesitamos descubrir su sentido. La circunferencia comienza de izquierda a derecha, pero cuando su posición X sea superior a 600, necesitamos invertir su sentido. La misma lógica cuando esté retornando de derecha para izquierda y la posición sea menor que 0, necesitamos invertir el sentido nuevamente.
+
+Siendo así, vamos a crear una variable sentido. Vamos a inicializarla con el valor de 1, indicando que nuestra variable X debe ser incrementada de 1 en 1. Cuando sea mayor que 600, sentido recibirá el valor de -1, lo que hará el de decremento en la variable X.
+
+<canvas width="600" height="400"> </canvas>
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");        
+    pincel.fillStyle = "lightgrey";
+    pincel.fillRect(0,0,600,400); 
+
+    function disenharCircunferencia(x,y,radio){
+        pincel.fillStyle = "blue";
+        pincel.beginPath();
+        pincel.arc(x,y,radio,0,2*Math.PI);
+        pincel.fill();
+    }    
+
+    function limpiarPantalla(){
+
+        pincel.clearRect(0,0,600,400);
+
+    }
+
+    var x = 0
+    var sentido = 1;
+
+    function actualizarPantalla(){
+
+        limpiarPantalla();
+        disenharCircunferencia(x,20,10);
+        x++;
+    }
+
+    setInterval(actualizarPantalla,100);
+
+</script> 
+
+Ahora, dentro de la función actualizarPantalla, antes de llamar a disenharCircunferencia vamos a verificar si necesitamos alterar el valor de sentido.
+
+<canvas width="600" height="400"> </canvas>
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");        
+    pincel.fillStyle = "lightgrey";
+    pincel.fillRect(0,0,600,400); 
+
+    function disenharCircunferencia(x,y,radio){
+        pincel.fillStyle = "blue";
+        pincel.beginPath();
+        pincel.arc(x,y,radio,0,2*Math.PI);
+        pincel.fill();
+    }    
+
+    function limpiarPantalla(){
+
+        pincel.clearRect(0,0,600,400);
+
+    }
+
+    var x = 0
+    var sentido = 1;
+
+    function actualizarPantalla(){
+
+        limpiarPantalla();
+        if(x > 600){
+            sentido = -1;
+        }else if(x < 0){
+            sentido = 1;
+        }
+
+        disenharCircunferencia(x,20,10);
+        x++;
+    }
+
+    setInterval(actualizarPantalla,100);
+
+</script> 
+
+Ya que verificamos si sentido necesita ser alterado, ahora, después de llamar a la función disenharCircunferencia, vamos a usar el valor de nuestra variable para realizar el incremento de X.
+
+<canvas width="600" height="400"> </canvas>
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");        
+    pincel.fillStyle = "lightgrey";
+    pincel.fillRect(0,0,600,400); 
+
+    function disenharCircunferencia(x,y,radio){
+        pincel.fillStyle = "blue";
+        pincel.beginPath();
+        pincel.arc(x,y,radio,0,2*Math.PI);
+        pincel.fill();
+    }    
+
+    function limpiarPantalla(){
+
+        pincel.clearRect(0,0,600,400);
+
+    }
+
+    var x = 0
+    var sentido = 1;
+
+    function actualizarPantalla(){
+
+        limpiarPantalla();
+        if(x > 600){
+            sentido = -1;
+        }else if(x < 0){
+            sentido = 1;
+        }
+
+        disenharCircunferencia(x,20,10);
+        x = x + sentido;
+    }
+
+    setInterval(actualizarPantalla,100);
+
+</script> 
+
+Verifica el resultado.
+-->
+
+<canvas width="600" height="400"> </canvas>
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");        
+    pincel.fillStyle = "lightgrey";
+    pincel.fillRect(0,0,600,400); 
+
+    function disenharCircunferencia(x,y,radio){
+        pincel.fillStyle = "blue";
+        pincel.beginPath();
+        pincel.arc(x,y,radio,0,2*Math.PI);
+        pincel.fill();
+    }    
+
+    function limpiarPantalla(){
+
+        pincel.clearRect(0,0,600,400);
+
+    }
+
+    var x = 0
+    var sentido = 1;
+
+    function actualizarPantalla(){
+
+        limpiarPantalla();
+        if(x > 600){
+            sentido = -1;
+        }else if(x < 0){
+            sentido = 1;
+        }
+
+        disenharCircunferencia(x,20,10);
+        x = x + sentido;
+    }
+
+    //setInterval(actualizarPantalla,100);
+    setInterval(actualizarPantalla,5);
+
+</script> 

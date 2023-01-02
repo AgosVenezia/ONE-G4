@@ -1,0 +1,132 @@
+<!-- 
+Bernardo es un chico de 11 años y le gusta jugar Minecraft. Minecraft es un juego donde construyes un mundo con bloques, como si fuera un Lego virtual. Uno de los personajes principales del juego es Creeper, y Bernardo pidió un poster con esa caricatura.
+
+Para facilitar un poco, las dimensiones de nuestros rectángulos (base x altura) en pixeles es el siguiente:
+
+Rectángulo 1: 350, 300 (cabeza).
+Rectángulos 2 y 3: 90, 90 (ojos).
+Rectángulo 4: 70, 100 (nariz).
+Rectángulos 5 y 6: 40, 110 (parte de la boca). Su canvas debe tener el tamaño de 600 x 400 pixeles.
+¿Será que consigues ayudar a Bernardo creando el poster con la imagen Creeper? A continuación encontrarás un paso a paso para guiarte mejor:
+
+Crear un nuevo archivo, por ejemplo creeper.html;
+Definir la etiqueta (tag) canvas
+Crear un script usando los objetos pantalla y pincel
+Diseñar los rectángulos a través de la función fillRect del pincel
+No olvides pintar los rectángulos, aquí usamos los colores darkgreen y black
+¡Manos a la obra!
+
+
+Como vimos en el video, primeramente debemos declarar la etiqueta (tag) canvas:
+
+<canvas width="600" height="400"></canvas>
+
+Con la etiqueta definida, creamos un script para captura la pantalla con el pincel. Como vamos a diseñar en 2d, pasamos ese valor para la función getContext del objeto pantalla.
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");
+     //aquí viene más
+</script>
+
+Con el pincel en mano podemos diseñar la cabeza verde de Creeper. Las coordenadas iniciales son 200 en el eje X y 50 en el eje Y; con una base de 350 pixeles y altura de 300 pixeles.
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");
+    //cabeza
+    pincel.fillStyle = 'darkgreen';
+    pincel.fillRect(200, 50, 350 ,300);
+</script>
+
+Ahora vienen los ojos negros, el ojo izquierdo inicia en las coordenadas X=250 y Y=110, por su parte el ojo derecho inicia en las coordenadas X=410 y Y=110, las dos figuras tienen dimensiones de 90 de base por 90 de altura.
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");
+    //cabeza
+    pincel.fillStyle = 'darkgreen';
+    pincel.fillRect(200, 50, 350 ,300);
+    //ojos
+    pincel.fillStyle = 'black';
+    pincel.fillRect(250, 110, 90, 90);
+    pincel.fillRect(410, 110, 90, 90);
+</script>
+
+La nariz queda entre los ojos. Ten en cuenta que el primer ojo comienza en la coordenada X = 250 y tiene una base de 90. Como la nariz debe comenzar después del primer ojo, su X inicial debe ser X inicial del primer ojo más su base, que sería 250 + 90 = 340, siendo esta la posición inicial de la nariz. La coordenada vertical Y de la nariz es al final de los ojos, Y inicial del ojo más su altura, por lo tanto, tenemos 110 + 90 = 200.
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");
+    //cabeza
+    pincel.fillStyle = 'darkgreen';
+    pincel.fillRect(200, 50, 350 ,300);
+    //ojos
+    pincel.fillStyle = 'black';
+    pincel.fillRect(250, 110, 90, 90);
+    pincel.fillRect(410, 110, 90, 90);
+    //nariz
+    pincel.fillRect(340, 200, 70, 100);
+</script>
+
+Al final diseñamos la boca. Cada parte de la boca es un rectángulo de 40 de anchura por 110 de altura. Las coordenadas de la primera parte de la boca (izquierda) es el X inicial de la nariz menos 40, siendo 340 - 40 = 300. La coordenada X de la segunda parte de la boca (derecha) comienza al final de la nariz, esto sería 340 + 70 = 410.
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");
+    //cabeza
+    pincel.fillStyle = 'darkgreen';
+    pincel.fillRect(200, 50, 350 ,300);
+    //ojos
+    pincel.fillStyle = 'black';
+    pincel.fillRect(250, 110, 90, 90);
+    pincel.fillRect(410, 110, 90, 90);
+    //nariz
+    pincel.fillRect(340, 200, 70, 100);
+    //boca
+    pincel.fillRect(300, 240, 40, 110);
+    pincel.fillRect(410, 240, 40, 110);
+</script>
+
+El código final quedaría así:
+
+<canvas width="600" height="400"></canvas>
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");
+    //cabeza
+    pincel.fillStyle = 'darkgreen';
+    pincel.fillRect(200, 50, 350 ,300);
+    //ojos
+    pincel.fillStyle = 'black';
+    pincel.fillRect(250, 110, 90, 90);
+    pincel.fillRect(410, 110, 90, 90);
+    //nariz
+    pincel.fillRect(340, 200, 70, 100);
+     //boca
+    pincel.fillRect(300, 240, 40, 110);
+    pincel.fillRect(410, 240, 40, 110);
+</script>
+
+Observación: puede ser que hayas utilizado otras coordenadas iniciales en tu diseño, por lo tanto, puede ser que tu creeper haya quedado ubicado en otra posición del canvas, pero tranquilo eso no representa ningún problema.
+-->
+
+<canvas width="600" height="400"></canvas>
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");
+    //cabeza
+    pincel.fillStyle = 'darkgreen';
+    pincel.fillRect(200, 50, 350 ,300);
+    //ojos
+    pincel.fillStyle = 'black';
+    pincel.fillRect(250, 110, 90, 90);
+    pincel.fillRect(410, 110, 90, 90);
+    //nariz
+    pincel.fillRect(340, 200, 70, 100);
+     //boca
+    pincel.fillRect(300, 240, 40, 110);
+    pincel.fillRect(410, 240, 40, 110);
+</script>

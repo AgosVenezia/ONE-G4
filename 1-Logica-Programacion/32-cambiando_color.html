@@ -1,0 +1,213 @@
+<!-- 
+Aprendimos en este capítulo a interactuar con el usuario, por ejemplo, dibujando un círculo azul cada vez que hacía clic en el canvas, en la pantalla.
+
+<canvas width="600" height="400"> </canvas>
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");    
+    pincel.fillStyle = "grey";
+    pincel.fillRect(0,0,600,400); 
+
+    function dibujarCirculo(evento){
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;    
+        pincel.fillStyle = "blue";
+        pincel.beginPath();
+        pincel.arc(x,y,10,0,2*3.14);
+        pincel.fill();
+        console.log(x + "," + y);        
+    }
+
+    pantalla.onclick = dibujarCirculo;
+
+</script> 
+
+Para eso, fue necesario asociar la función dibujarCirculo al evento onclick de nuestra pantalla. Aprendimos también, que será nuestro navegador quién llamará a nuestra función al momento de identificar clics en el canvas. Además de llamar a la función, el propio navegador pasa un parámetro para la función. Gracias a ese parámetro, tenemos acceso a varias informaciones sobre el evento disparado, y así podemos descubrir la posición del eje X y Y de la coordenada donde el usuario hizo clic.
+
+Ejercicio
+
+Ahora que ya recapitulamos lo que hicimos en este capítulo, tengo una propuesta de alteración del código de arriba con el objetivo que apliques los conocimientos adquiridos hasta aquí, lo más importante es que desarrolles tu lógica de programación. Intenta resolverlo y de todas maneras puedes ver la solución del ejercicio haciendo clic en el botón Ver opinión del instructor.
+
+Bueno el desafío es el siguiente, vamos a liberar que el usuario pueda alterar el color de los círculos que son diseñados en la pantalla. Los colores que liberaremos serán azul, rojo y verde (blue, red y green). Esa lista de colores te debe recordar algo que ya vimos, los arrays en el anterior curso.
+
+¿Cómo dejaremos al usuario escoger el color? A cada clic del botón DERECHO del mouse, el color padrón que es blue, deberá cambiarse a red. Si el usuario realiza otro clic del botón DERECHO, el color del círculo se cambiará a green, debes respetar el orden de alteración de los colores (blue, red y green). En caso de que el usuario vuelva a presionar el botón DERECHO el color debe volver a ser blue.
+
+Para que las circunferencias aparezcan seguimos manteniendo la misma lógica, ellas aparecerán con cada clic IZQUIERDO del mouse.
+
+La instrucción para capturar el evento cuando el usuario hace clic en el botón derecho todavía no fue enseñada, pero es fácil de ser implementada, el comando a ser usado es oncontextmenu. La sintaxis es igual al evento onclick que usamos para capturar el clic del botón izquierdo del mouse, de todas formas te muestro a continuación cómo puedes usar esa instrucción:
+
+<canvas width="600" height="400"> </canvas>
+
+<script>
+
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");    
+    pincel.fillStyle = "grey";
+    pincel.fillRect(0,0,600,400); 
+
+    function dibujarCirculo(evento){
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;    
+        pincel.fillStyle = "blue";
+        pincel.beginPath();
+        pincel.arc(x,y,10,0,2*3.14);
+        pincel.fill();
+        console.log(x + "," + y);        
+    }
+
+    pantalla.onclick = dibujarCirculo;
+
+    function alterarColor() {
+        alert("Funcionó");
+        return false;
+    }
+
+    pantalla.oncontextmenu = alterarColor;
+
+</script> 
+
+Ejecuta ese programa y prueba realizar clic en el botón DERECHO en la pantalla. El mensaje "Funcionó" será exhibido. La instrucción return false es importante para que el menú contextual padrón de canvas no sea exhibido, o sea, queremos apenas alterar el color con el clic del botón y no exhibir un menú para el usuario.
+
+Recuerda que no existe código perfecto, preocúpate por resolver el desafío con todas las herramientas y conocimientos que adquiriste hasta aquí. Si tienes dudas puedes acudir al foro. Y al final compara tu resultado con el resultado del instructor.
+
+
+El primer paso será crear dos variables. La primera un array de los colores, la segunda el índice del color actual seleccionado.
+
+<canvas width="600" height="400"> </canvas>
+
+<script>
+
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");    
+    pincel.fillStyle = "grey";
+    pincel.fillRect(0,0,600,400); 
+    var colores = ["blue", "red", "green"];        
+    var indiceColorActual = 0; // comienza con blue
+
+    function dibujarCirculo(evento){
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;    
+        pincel.fillStyle = colores[indiceColorActual];
+        pincel.beginPath();
+        pincel.arc(x,y,10,0,2*3.14);
+        pincel.fill();
+        console.log(x + "," + y);        
+    }
+
+    pantalla.onclick = dibujarCirculo;
+
+    function alterarColor() {
+        alert("Funcionó");
+        return false;
+    }
+
+    pantalla.oncontextmenu = alterarColor;
+
+</script> 
+
+Toma en cuenta que dentro de la función dibujarCirculo definimos el color pasado para pincel.fillStyle, usando el índice y nuestro array de colores. Para obtener un color del array necesitamos de su índice (posición), la primera vez que el usuario abre la aplicación el valor del indiceColorActual es 0, que es el índice para el color blue. Necesitamos ahora implementar el cambio de color a través del clic derecho del mouse. Para eso vamos a modificar la función alterarColor, que ya fue asociada al evento oncontextmenu de nuestra pantalla.
+
+<canvas width="600" height="400"> </canvas>
+
+<script>
+
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");    
+    pincel.fillStyle = "grey";
+    pincel.fillRect(0,0,600,400); 
+    var colores = ["blue", "red", "green"];
+    var indiceColorActual = 0; // comienza con blue
+
+    function dibujarCirculo(evento){
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;    
+        pincel.fillStyle = colores[indiceColorActual];
+        pincel.beginPath();
+        pincel.arc(x,y,10,0,2*3.14);
+        pincel.fill();
+        console.log(x + "," + y);        
+    }
+
+    pantalla.onclick = dibujarCirculo;
+
+    function alterarColor() {
+       indiceColorActual++;
+       alert(indiceColorActual);
+       return false; //menú contextual padrón de `canvas` no sea exhibido
+    }
+
+    pantalla.oncontextmenu = alterarColor;
+
+</script> 
+
+Nota que en cada clic del botón derecho, incrementamos la variable indiceColorActual, por lo tanto, si hacemos 10 veces clic derecho, su valor final será 9 y eso no es correcto porque su valor máximo no puede pasar de 2, pues es el último índice para acceder al último elemento del array. Entonces, necesitamos comprobar con un if cada vez que alterarColor sea llamada y verificar si el indiceColorActual es mayor o igual a colores.length. Si fuera, alteramos el índice para 0, reiniciamos el índice y volvemos al color blue. La solución final quedaría así:
+
+<canvas width="600" height="400"> </canvas>
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");    
+    pincel.fillStyle = "grey";
+    pincel.fillRect(0,0,600,400); 
+    var colores = ["blue", "red", "green"];
+    var indiceColorActual = 0; // comienza con blue
+
+    function dibujarCirculo(evento){
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;    
+        pincel.fillStyle = colores[indiceColorActual];
+        pincel.beginPath();
+        pincel.arc(x,y,10,0,2*3.14);
+        pincel.fill();
+        console.log(x + "," + y);        
+    }
+
+    pantalla.onclick = dibujarCirculo;
+
+    function alterarColor() {
+        indiceColorActual++;
+        if(indiceColorActual>= colores.length) {
+             indiceColorActual = 0; //vuelve para el primer color, blue
+        }
+        return false; //menú contextual padrón de `canvas` no sea exhibido
+    }
+
+    pantalla.oncontextmenu = alterarColor;
+
+</script> 
+-->
+
+<canvas width="600" height="400"> </canvas>
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");    
+    pincel.fillStyle = "grey";
+    pincel.fillRect(0,0,600,400); 
+    var colores = ["blue", "red", "green"];
+    var indiceColorActual = 0; // comienza con blue
+
+    function dibujarCirculo(evento){
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;    
+        pincel.fillStyle = colores[indiceColorActual];
+        pincel.beginPath();
+        pincel.arc(x,y,10,0,2*3.14);
+        pincel.fill();
+        console.log(x + "," + y);        
+    }
+
+    pantalla.onclick = dibujarCirculo;
+
+    function alterarColor() {
+        indiceColorActual++;
+        if(indiceColorActual>= colores.length) {
+             indiceColorActual = 0; //vuelve para el primer color, blue
+        }
+        return false; //menú contextual padrón de `canvas` no sea exhibido
+    }
+
+    pantalla.oncontextmenu = alterarColor;
+
+</script> 

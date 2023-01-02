@@ -1,0 +1,81 @@
+<!-- 
+Ya practicamos bastante con rectángulos, es hora de diseñar otra figura. En este nuevo desafío vamos a diseñar una escuadra (plantilla especial en forma de un triángulo isósceles usada por arquitectos e ingenieros).
+
+Si analizamos la figura, podemos percibir que una escuadra no es otra cosa que dos triángulos, uno dentro del otro. Recordando también que diseñar triángulos es diferente de diseñar rectángulos, pues es preciso diseñar línea por línea. En otras palabras podemos decir que la API es diferente.
+
+Para diseñar es necesario inicializar un path y mover el pincel para una posición:
+
+var pantalla = document.querySelector("canvas");
+var pincel = pantalla.getContext("2d");
+pincel.beginPath();
+pincel.moveTo(50, 50);
+
+A partir de ahí podemos diseñar una línea:
+
+var pantalla = document.querySelector("canvas");
+var pincel = pantalla.getContext("2d");
+pincel.beginPath();
+pincel.moveTo(50, 50);
+pincel.lineTo(50, 400);
+
+Una vez que diseñamos todas las líneas, podemos finalizar rellenando la figura con:
+
+pincel.fill();
+
+Ahora es tu turno, crea un nuevo programa (por ejemplo escuadra.html) y diseña una escuadra basada en las coordenadas de la imagen de arriba.
+
+Como siempre hay una ayuda, para ver la respuesta del instructor basta hacer clic en el botón Ver opinión del instructor.
+
+
+Con las coordenadas definidas, es solo mover el pincel para el lugar correcto. Es importante resaltar que debemos comenzar un nuevo path para cada triángulo.
+
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");
+    pincel.fillStyle='black';
+    pincel.beginPath();
+    pincel.moveTo(50, 50);
+    pincel.lineTo(50, 400);
+    pincel.lineTo(400, 400);
+    pincel.fill();
+
+    pincel.fillStyle='white';
+    pincel.beginPath();
+    pincel.moveTo(100, 175);
+    pincel.lineTo(100, 350);
+    pincel.lineTo(275, 350);
+    pincel.fill();
+
+
+</script>
+
+Toma en cuenta que la API que construimos sirve para diseñar otras figuras geométricas, no sólo triángulos, podemos diseñar rectángulos por ejemplo, todo depende para donde mandamos el pincel.
+-->
+
+<!-- escuadra.html -->
+
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");
+    pincel.fillStyle='black';
+    pincel.beginPath();
+    pincel.moveTo(50, 50);
+    pincel.lineTo(50, 400);
+    pincel.lineTo(400, 400);
+    pincel.fill();
+
+    pincel.fillStyle='white';
+    pincel.beginPath();
+    pincel.moveTo(100, 175);
+    pincel.lineTo(100, 350);
+    pincel.lineTo(275, 350);
+    pincel.fill();
+
+
+</script>
