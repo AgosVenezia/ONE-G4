@@ -4,6 +4,7 @@
     font-weight: 400;
     font-size: 32px;
     line-height: 150%;
+    overflow-y: hidden;
 }
 
 .logo {
@@ -14,14 +15,16 @@
 
 main {
     display: flex;
-    margin-bottom: 50px;
-    margin-left: 80px;
+    margin-bottom: 10px;
+    margin-left: 180px;
 }
 
 .text-area {
+    height: 400px;
     border: none;
     color: #0A3871;
-    margin-top: 90px;
+    margin-top: 30px;
+    padding: 2px;
     /*text-transform: lowercase;*/
 }
 
@@ -82,7 +85,8 @@ main {
     width: 328px;
     margin-left: 108px;
     margin-top: 402px;
-    position: absolute;
+    /*position: absolute;*/
+    position: fixed;
     width: 336px;
 }
 
