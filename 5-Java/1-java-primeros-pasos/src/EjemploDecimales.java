@@ -7,6 +7,7 @@ public class EjemploDecimales {
 		System.out.println(salario);
 		
 		double edad = 28; // Numeros enteros si pueden ser asignados a variables tipo double
+		System.out.println(edad);
 		double salarioMitad = salario / 2; 
 		System.out.println(salarioMitad); // Podemos usar variables directamente en operaciones matematicas
 		
