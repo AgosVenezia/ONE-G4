@@ -11,5 +11,6 @@ public class PruebaConstructor {
         Cuenta cuenta3 = new Cuenta(912); // Las tres tienen en común la variable static
 
         System.out.println(cuenta1.getAgencia()); // No cuenta valores negativos e inicializa con 0 por defecto
+        System.out.println(Cuenta.getTotal());
     }
 }

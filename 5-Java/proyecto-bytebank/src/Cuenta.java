@@ -6,12 +6,14 @@
 class Cuenta {
     //double saldo;
     private double saldo;
-    private int agencia;
+    //private int agencia;
+    private int agencia = 1;
     //int agencia = 15; // inicializa con 15 en todas las instancias
     private int numero;
     //String titular;
     //Cliente titular;
     private Cliente titular = new Cliente(); // Cuando inicializa una cuenta, también inicializa al cliente
+    
     private static int total = 0; // Static: la variable no es de la instancia, es de la clase. La variable no va a ser alterada por la instancia, sino por la clase (cuenta).
     
     //public Cuenta() {  // Cuando modificás el constructor, lo tenés que crear manualmente.
@@ -30,10 +32,10 @@ class Cuenta {
         }
         total++;
         //System.out.println("Aquí se crea una nueva cuenta");
-        System.out.println("Se van creando; " + total + " cuentas");
+        System.out.println("Se van creando: " + total + " cuentas");
 
     }
-    
+
     // No retorna valor (void)
     public void depositar(double valor) {
         // Esta cuenta  Esta cuenta  Parámetro
@@ -85,11 +87,25 @@ class Cuenta {
         return this.agencia;
     }
 
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        if (numero > 0) {
+            this.numero = numero;
+        }
+    }
+
     public void setTitular (Cliente titular) {
         this.titular = titular;
     }
 
     public Cliente getTitular() {
         return titular;
+    }
+
+    public static int getTotal() {
+        return Cuenta.total;
     }
 }

@@ -1,6 +1,6 @@
 public class TestReferencia3 {
     public static void main(String[] args) {
-        Cuenta cuentaDeDiego = new Cuenta();
+        //Cuenta cuentaDeDiego = new Cuenta(009);
         //cuentaDeDiego.titular.nombre = "Diego"; 
         //Cliente cliente = new Cliente();
         //cuentaDeDiego.titular = cliente; 
@@ -10,7 +10,7 @@ public class TestReferencia3 {
         //cuentaDeDiego.titular.nombre = "Diego"; // Inicializar atributo manualmente
 
         //System.out.println(cuentaDeDiego.titular.nombre); // Exception
-        System.out.println(cuentaDeDiego.titular.nombre); // null
+        //System.out.println(cuentaDeDiego.titular.nombre); // null
         //System.out.println(cuentaDeDiego.titular.nombre); // Diego
     }
 }

@@ -1,6 +1,6 @@
 public class PruebaAcceso {
     public static void main(String[] args) {
-        Cuenta cuenta = new Cuenta();
+        Cuenta cuenta = new Cuenta(003);
         //cuenta.saldo = 200;
         //cuenta.obtenerSaldo() = 200; // Un método no se puede igualar
         cuenta.setAgencia(22);
