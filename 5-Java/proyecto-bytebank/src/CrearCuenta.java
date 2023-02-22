@@ -5,7 +5,7 @@ public class CrearCuenta {
         Cuenta primeraCuenta = new Cuenta();
         primeraCuenta.saldo = 1000;
         // primeraCuenta.pais = "Perú"; // No compila!
-        System.out.println(primeraCuenta.saldo);
+        System.out.println(primeraCuenta.getSaldo());
 
         Cuenta segundaCuenta = new Cuenta(); // La palabra reservada new inicializa
         segundaCuenta.saldo = 500;
