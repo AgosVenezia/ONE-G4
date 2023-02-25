@@ -41,6 +41,7 @@ public class Funcionario {
         this.tipo = tipo;
     }
 
+    /*
     public double getBonificacion() {
         // si tipo = 1 GERENTE
         // si tipo = 0 FUNCIONARIO
@@ -51,7 +52,12 @@ public class Funcionario {
         } else {
             return 0;
         }
-        
+    */
+
+    // Sobre-escritura
+    // public double getBonificacion()
+    public double getBonificacion() {
+        return this.salario * 0.1;
     }
 
 }
