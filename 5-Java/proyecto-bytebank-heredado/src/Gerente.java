@@ -15,6 +15,7 @@ public class Gerente extends Funcionario {
     // Sobre-escritura de método
     // Es la misma firma del método pera la estoy repitiendo en la clase hija, según su propia lógica
     public double getBonificacion() {
+        System.out.println("EJECUTANDO DESDE GERENTE");
         //return this.salario;  // No compila
         //return super.getSalario();
         // Con la palabra reservada super tenemos acceso a los métodos de la clase padre
