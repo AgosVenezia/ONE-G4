@@ -4,6 +4,7 @@ Existe otro concepto en los lenguajes OO que se llama sobrecarga que es mucho m�
 Por ejemplo, en nuestra clase Gerente, imagina otro nuevo método autenticar que recibe además de la contraseña también el login:
 */
 
+/*
 public class Gerente2 extends Funcionario {
 
     private int contraseña;
@@ -31,6 +32,7 @@ public class Gerente2 extends Funcionario {
 
     // Otros métodos omitidos
 }
+*/
 
 /*
 Observe que hemos creado una nueva versión del método autenticar. Ahora tenemos dos métodos de autenticar en la misma clase que varían en el número o tipo de parámetros. Esto se llama sobrecarga de métodos.

@@ -1,4 +1,5 @@
-public class Funcionario {
+// La clase abstracta no puede ser instanciada como tal
+public abstract class Funcionario {
     
     private String nombre; 
     private String documento;
@@ -56,8 +57,12 @@ public class Funcionario {
 
     // Sobre-escritura
     // public double getBonificacion()
+    /* PASA A SER ABSTRACTO
     public double getBonificacion() {
         return this.salario * 0.1;
-    }
+    }*/
+
+    // No tienen cuerpo (implementación), solo definen la firma
+    public abstract double getBonificacion();
 
 }

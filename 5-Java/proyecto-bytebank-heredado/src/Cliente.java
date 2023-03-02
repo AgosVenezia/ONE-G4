@@ -1,4 +1,6 @@
-public class Cliente {
+//public class Cliente extends Autenticable {
+public class Cliente implements Autenticable {
+// Una interfaz no puede extender de una clase
     
     private String nombre;
     private String documento;
@@ -26,5 +28,24 @@ public class Cliente {
 
     public void setTelefono (String telefono) {
         this.telefono = telefono;
+    }
+
+    public boolean iniciarSesion(String clave) {
+        return false;
+    }
+
+    @Override
+    public double getBonificacion() {
+        return 0;
+    }
+
+    @Override
+    public boolean iniciarSesion(String clave) {
+        return false;
+    }
+
+    @Override
+    public void setClave(String clave) {
+        
     }
 }

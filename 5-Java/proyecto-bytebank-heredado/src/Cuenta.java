@@ -1,12 +1,14 @@
-class Cuenta {
-    private double saldo;
+public abstract class Cuenta {
+    //private double saldo;
+    // Protected es accesible desde las clases hijas
+    protected double saldo;
     private int agencia = 1;
     private int numero;
     private Cliente titular = new Cliente(); 
 
     private static int total;
 
-
+    // Puede tener constructores por defecto y personalizados también
     public Cuenta(int agencia, int numero) {
         if (agencia <= 0) {
             System.out.println("No se permite 0");
@@ -19,9 +21,10 @@ class Cuenta {
 
     }
 
-    public void depositar(double valor) {
-        this.saldo += valor;
-    }
+    // Métodos abstractos sólo en clases abstractas
+    public abstract void depositar(double valor); //{
+        //this.saldo += valor;
+    //}
 
     public boolean retirar(double valor) {
         if (this.saldo >= valor) {
