@@ -29,11 +29,6 @@ public class Gerente extends Funcionario implements Autenticable {
     // Si la clase es abstracta no estoy obligado a instanciar los métodos abstractos
 
     @Override
-    public double getBonificacion() {
-        return 0;
-    }
-
-    @Override
     public boolean iniciarSesion(String clave) {
         return false;
     }
