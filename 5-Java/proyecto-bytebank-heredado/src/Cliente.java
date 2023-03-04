@@ -1,6 +1,7 @@
 //public class Cliente extends Autenticable {
 public class Cliente implements Autenticable {
 // Una interfaz no puede extender de una clase
+// No puedo extender de una interfaz pero puedo implementarla
     
     private String nombre;
     private String documento;

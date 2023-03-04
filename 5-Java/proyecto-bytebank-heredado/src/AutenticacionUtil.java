@@ -10,3 +10,8 @@ public class AutenticacionUtil {
         this.clave = clave;
     }
 }
+
+/* UTILITARIOS: 
+Métodos que no le pertenecen a ninguna clase pero ayudan a no repetir código.
+Con composiciones e interfaces tendremos más flexibilidad con nuestro código, ya que no estaremos apegados al acoplamiento que propone la herencia.
+*/
