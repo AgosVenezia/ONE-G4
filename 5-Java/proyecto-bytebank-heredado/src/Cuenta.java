@@ -30,7 +30,7 @@ public abstract class Cuenta {
         if (this.saldo >= valor) {
             this.saldo -= valor;
             return true;
-        }
+        } //else if (cuentaBloqueada)
         return false;
     }
 
