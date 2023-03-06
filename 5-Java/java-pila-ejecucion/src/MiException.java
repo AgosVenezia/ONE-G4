@@ -1,6 +1,6 @@
-//public class MiException extends Exception {
 // Si extiendo de exceptión, le tengo que indicar que lance mi excepción
-public class MiException extends RuntimeException {
+//public class MiException extends RuntimeException {  // UNCHECKED
+public class MiException extends Exception {  // CHECKED
     
     public MiException() {
         super();
