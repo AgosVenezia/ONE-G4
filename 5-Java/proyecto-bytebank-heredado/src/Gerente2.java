@@ -4,21 +4,20 @@ Existe otro concepto en los lenguajes OO que se llama sobrecarga que es mucho m�
 Por ejemplo, en nuestra clase Gerente, imagina otro nuevo método autenticar que recibe además de la contraseña también el login:
 */
 
-
 public class Gerente2 extends Funcionario {
 
-    private int contraseña;
+    private int contrasena;
 
-    public int getContraseña() {
-        return contraseña;
+    public int getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(int contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(int contrasena) {
+        this.contrasena = contrasena;
     }
 
-    public boolean autenticar(int contraseña) {
-        if (this.contraseña == contraseña) {
+    public boolean autenticar(int contrasena) {
+        if (this.contrasena == contrasena) {
             return true;
         } else {
             return false;
