@@ -1,3 +1,4 @@
+// Un iterator es una forma en cómo nosotros vamos a leer una lista, un collection, por ejemplo. 
 import java.util.Iterator;
 
 public class Clase16 {
@@ -26,6 +27,7 @@ public class Clase16 {
 
         Iterator<Alumno> alumnoIterator = curso1.getAlumnos().iterator();
 
+        // Ya recorrí, error (no encontró element)
         while (alumnoIterator.hasNext()){
             System.out.println(alumnoIterator.next());
         }

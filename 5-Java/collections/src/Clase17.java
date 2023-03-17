@@ -38,3 +38,8 @@ public class Clase17 {
         alumnoIterator.next();
     }
 }
+
+/*
+Entonces no sabemos si vamos a trabajar con set, con list, entonces nuestro atributo va a ser un collection y cualquier situación, lo cambiamos. Ahora, si ya sabíamos, si es set, tenemos que también utilizar nuestro equals y hashCode para poder hacer las comparaciones por el hash, qué es lo que el hashSet y el linked hashSet piden. Entonces existen esos pequeños detalles que de acuerdo a nuestras necesidades van a surgir por qué usar uno, por qué usar el otro.
+En la mayoría de las situaciones va a ser también un poco de performance, porque por ejemplo queremos adicionar una lista, un valor a una lista o queremos modificar una lista, tal vez más rápido sea el hashSet. Queremos remover, tal vez los dos sean iguales. Queremos la posición tal, tal vez sea mejor el list. No nos interesa la posición, puede ser el hashSet. Queremos recorrer una lista con un while, podemos utilizar el iterator. Queremos recorrerlo con lambda, podemos utilizar el forEach de lambda. Queremos utilizar filter, podemos utilizar el forEach del mismo modo. Podemos convertir nuestra lista en string y utilizamos el filter también.
+*/

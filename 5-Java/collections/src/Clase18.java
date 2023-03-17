@@ -1,4 +1,3 @@
-import java.util.Iterator;
 import java.util.Optional;
 
 public class Clase18 {
@@ -32,6 +31,10 @@ public class Clase18 {
         if(alumno.isPresent()){
             System.out.println(alumno.get());
         }
+
+/*
+Un mapa es una interfaz, hace parte del package java.util no posee métodos de la interfaz Collection, trabaja bajo un concepto de (llave, valor).
+*/
 
         Alumno alumnoMap = curso1.getAlumnoMap().get("003");
 
