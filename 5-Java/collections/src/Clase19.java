@@ -1,14 +1,4 @@
-package com.alura;
-
-import com.alura.model.Alumno;
-import com.alura.model.Curso;
-
-import java.util.Optional;
-
 public class Clase19 {
-
-    // TODO: https://docs.oracle.com/javase/tutorial/collections/interfaces/index.html
-    // TODO: https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Collection.html
 
     public static void main(String[] args) {
 
@@ -34,13 +24,12 @@ public class Clase19 {
 
         Alumno alumnoMap = curso1.getAlumnoMap().get("003");
 
+        //curso1.getAlumnoMap().forEach((key, value) -> {
         curso1.getAlumnoMap().forEach((codigo, alumno) -> {
             System.out.println(alumno);
         });
 
-        //System.out.println(alumnoMap);
-
-
+        System.out.println(alumnoMap);
 
     }
 }

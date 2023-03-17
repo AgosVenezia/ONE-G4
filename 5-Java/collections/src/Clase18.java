@@ -1,17 +1,9 @@
-package com.alura;
-
-import com.alura.model.Alumno;
-import com.alura.model.Curso;
-
 import java.util.Iterator;
 import java.util.Optional;
 
 public class Clase18 {
 
-    // TODO: https://docs.oracle.com/javase/tutorial/collections/interfaces/index.html
-    // TODO: https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Collection.html
-
-    public static void main(String[] args) {
+     public static void main(String[] args) {
 
         Curso curso1 = new Curso("Historia",30) ;
 
@@ -31,8 +23,10 @@ public class Clase18 {
         curso1.addAlumno(alumno6);
         curso1.addAlumno(alumno7);
 
-        //curso1.getAlumnos().forEach(alumno -> System.out.println(alumno));
+        curso1.getAlumnos().forEach(alumno -> System.out.println(alumno));
 
+        //curso1.getAlumnos().stream().filter(a -> a.getCodigo().equalsIgnoreCase("003"));
+        //curso1.getAlumnos().stream().filter(a -> "003".equalsIgnoreCase(a.getCodigo())).findFirst();
         Optional<Alumno> alumno = curso1.getAlumnos().stream().filter(a -> "003".equalsIgnoreCase(a.getCodigo())).findFirst();
 
         if(alumno.isPresent()){

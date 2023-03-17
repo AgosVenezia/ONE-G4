@@ -34,6 +34,11 @@ public class Alumno {
     public int hashCode() {
         return this.nombre.hashCode();
     }
+
+    /*@Override
+    public int hashCode() {
+        return this.codigo.hashCode();
+    }*/
 }
 
 /* 

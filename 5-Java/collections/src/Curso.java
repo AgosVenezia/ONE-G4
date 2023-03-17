@@ -1,8 +1,12 @@
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+//import java.util.LinkedHashMap;
+//import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 
 //public class Curso implements Comparable<Curso> {
 public class Curso {
@@ -11,6 +15,9 @@ public class Curso {
     private int tiempo;
     private List<Aula> aulaList = new ArrayList<>();
     private Collection<Alumno> alumnos = new HashSet<>();
+    //private Collection<Alumno> alumnos = new LinkedHashSet<>();
+    private Map<String, Alumno> alumnoMap = new HashMap<>();
+    //private Map<String, Alumno> alumnoMap = new LinkedHashMap<>();
 
     public Curso (String nombre, int tiempo) {
         this.nombre = nombre;
@@ -62,6 +69,10 @@ public class Curso {
 
     public Collection<Alumno> getAlumnos() {
         return alumnos;
+    }
+
+    public Map<String, Alumno> getAlumnoMap() {
+        return alumnoMap;
     }
 
     @Override

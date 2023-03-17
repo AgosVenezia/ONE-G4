@@ -1,16 +1,8 @@
-package com.alura;
-
-import com.alura.model.Alumno;
-import com.alura.model.Curso;
-
 import java.util.Iterator;
 
 public class Clase16 {
 
-    // TODO: https://docs.oracle.com/javase/tutorial/collections/interfaces/index.html
-    // TODO: https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Collection.html
-
-    public static void main(String[] args) {
+     public static void main(String[] args) {
 
         Curso curso1 = new Curso("Historia",30) ;
 

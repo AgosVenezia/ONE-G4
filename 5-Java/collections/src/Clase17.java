@@ -1,14 +1,6 @@
-package com.alura;
-
-import com.alura.model.Alumno;
-import com.alura.model.Curso;
-
 import java.util.Iterator;
 
 public class Clase17 {
-
-    // TODO: https://docs.oracle.com/javase/tutorial/collections/interfaces/index.html
-    // TODO: https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Collection.html
 
     public static void main(String[] args) {
 
@@ -30,7 +22,12 @@ public class Clase17 {
         curso1.addAlumno(alumno6);
         curso1.addAlumno(alumno7);
 
-        curso1.getAlumnos().forEach(alumno -> System.out.println(alumno));
+        //for (int i)
+        //for (Alumno alumno : curso1.getAlumnos()) {
+            
+        //}
+        
+        //curso1.getAlumnos().stream().filter().forEach(alumno -> System.out.println(alumno));
 
         Iterator<Alumno> alumnoIterator = curso1.getAlumnos().iterator();
 
