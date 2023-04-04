@@ -296,16 +296,16 @@ INSERT INTO tbProducto (PRODUCTO, NOMBRE, TAMANO, SABOR, ENVASE, PRECIO_LISTA) V
 INSERT INTO tbProducto (PRODUCTO, NOMBRE, TAMANO, SABOR, ENVASE, PRECIO_LISTA) VALUES ('290478', 'Vida del Campo', '350 ml', 'Sandía', 'Lata', 4.56);
 INSERT INTO tbProducto (PRODUCTO, NOMBRE, TAMANO, SABOR, ENVASE, PRECIO_LISTA) VALUES ('1002767', 'Vida del Campo', '700 ml', 'Cereza/Manzana', 'Botella de Vidrio', 8.41);
 
-SELECT * FROM tbcliente;
+SELECT * FROM tbcliente; # Selecciona todos los registros de la tabla tbcliente
 
 SELECT DNI, NOMBRE, DIRECCION1, DIRECCION2, BARRIO, CIUDAD, ESTADO,CP, FECHA_NACIMIENTO, EDAD, 
-SEXO, LIMITE_CREDITO, VOLUMEN_COMPRA, PRIMERA_COMPRA FROM tbcliente;
+SEXO, LIMITE_CREDITO, VOLUMEN_COMPRA, PRIMERA_COMPRA FROM tbcliente; # Selecciona todos los registros de la tabla tbcliente
 
 SELECT DNI, NOMBRE FROM tbcliente;
 
 SELECT NOMBRE, SEXO, EDAD, DIRECCION1 FROM tbcliente;
 
-SELECT NOMBRE AS Nombre_Completo, SEXO AS Género, EDAD AS Años, DIRECCION1 AS Domicilio FROM tbcliente;
+SELECT NOMBRE AS Nombre_Completo, SEXO AS Género, EDAD AS Años, DIRECCION1 AS Domicilio FROM tbcliente; # Alias
 
 SELECT NOMBRE, SEXO, EDAD, DIRECCION1 FROM tbcliente LIMIT 6;
 
@@ -317,7 +317,7 @@ SELECT * FROM tbproducto WHERE ENVASE = 'Botella de Vidrio';
 
 UPDATE tbproducto SET SABOR = 'Cítrico' WHERE SABOR = 'Limón';
 
-SELECT * FROM tbproducto WHERE SABOR = 'Limón';
+SELECT * FROM tbproducto WHERE SABOR = 'Limón'; # Ya no me muestra nada porque reemplacé limón por cítrico
 
 SELECT * FROM tbproducto WHERE SABOR = 'Cítrico';
 
@@ -325,17 +325,23 @@ SELECT * FROM tbcliente;
 
 SELECT * FROM tbcliente WHERE EDAD > 27;
 
+SELECT * FROM tbcliente WHERE EDAD < 27;
+
 SELECT * FROM tbcliente WHERE EDAD <= 27;
 
-SELECT * FROM tbcliente WHERE EDAD <> 26;
+SELECT * FROM tbcliente WHERE EDAD <> 26; # Todos los registros que no son iguales a 26
 
-SELECT * FROM tbcliente WHERE  NOMBRE > 'Erica Carvajo';
+SELECT * FROM tbcliente WHERE  NOMBRE > 'Erica Carvajo'; # Todos los registros que vienen después de Erica Carvajo alfabeticamente
+
+SELECT * FROM tbcliente WHERE  NOMBRE < 'Erica Carvajo';
 
 SELECT * FROM tbcliente WHERE  NOMBRE <= 'Erica Carvajo';
 
 SELECT * FROM tbproducto;
 
-SELECT * FROM tbproducto WHERE PRECIO_LISTA = 28.51;
+SELECT * FROM tbproducto WHERE PRECIO_LISTA = 28.51; # No devuelve ninguno, a pesar de haber un registro 28.51
+
+SELECT * FROM tbproducto WHERE PRECIO_LISTA > 28.51; # Ahora si lo devuelve, porque lo considera mayor a 28.51
 
 SELECT * FROM tbproducto WHERE PRECIO_LISTA < 28.51;
 
@@ -353,6 +359,7 @@ SELECT * FROM tbcliente WHERE YEAR(FECHA_NACIMIENTO) = 1995;
 
 SELECT * FROM tbcliente WHERE DAY(FECHA_NACIMIENTO) = 20;
 
+# Filtros compuestos
 SELECT * FROM tbproducto;
 
 SELECT * FROM tbproducto WHERE PRECIO_LISTA BETWEEN 28.49 AND 28.52;
@@ -366,3 +373,11 @@ SELECT * FROM tbproducto WHERE PRECIO_LISTA >= 15 AND  PRECIO_LISTA <=25;
 SELECT * FROM tbproducto WHERE (PRECIO_LISTA >= 15 AND  PRECIO_LISTA <=25) OR (ENVASE = 'Lata' OR ENVASE = 'Botella PET');
 
 SELECT * FROM tbproducto WHERE (PRECIO_LISTA >= 15 AND  TAMANO = '1 Litro') OR (ENVASE = 'Lata' OR ENVASE = 'Botella PET');
+
+# Tabla vendedores 
+SELECT NOMBRE, MATRICULA FROM TABLA_DE_VENDEDORES; # Seleccionando a todos los vendedores
+SELECT * FROM TABLA_DE_VENDEDORES WHERE NOMBRE = 'Claudia Morais'; # Seleccionando a un vendedor
+SELECT * FROM TABLA_DE_VENDEDORES WHERE PORCENTAJE_COMISION > 0.10; # Seleccionando vendedores por el valor de la comisión
+SELECT * FROM TABLA_DE_VENDEDORES WHERE YEAR(FECHA_ADMISION) >= 2016; # Seleccionando a un vendedor por fecha
+SELECT * FROM TABLA_DE_VENDEDORES WHERE YEAR(FECHA_ADMISION) < 2016 AND DE_VACACIONES = 1; # Selección compuesta
+SELECT NOMBRE, MATRICULA FROM TABLA_DE_VENDEDORES; # Seleccionar a todos los vendedores
