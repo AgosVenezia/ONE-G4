@@ -8,21 +8,29 @@
 
 # UNIDAD 2
 
+# 2.2 Conociendo Workbench
 USE world; # Selecciona la base de datos world
 SELECT * FROM city; # Selecciona todos los datos de la tabla city en world
 SELECT * FROM country; # Selecciona todos los datos de la tabla country en world
 SELECT * FROM countrylanguage; # Selecciona todos los datos de la tabla countrylanguage en world
 
+# 2.3 Creando una base de datos
 CREATE DATABASE jugos; # Crea una nueva base de datos jugos
 DROP SCHEMA jugos; # Elimina la base de datos jugos
 SELECT * FROM CITY; # Selecciona todos los datos de la tabla city en jugos - No distingue entre mayúsculas y minúsculas
 select * from country; # Selecciona todos los datos de la tabla country en jugos - No distingue entre mayúsculas y minúsculas
 
+# 2.4 Creando una base de datos usando el asistente
 CREATE SCHEMA `jugos2` DEFAULT CHARACTER SET utf8; # Crea una nueva base de datos jugos2 usando el asistente de Workbench
+
+# 2.5 Eiminando una base de datos
+CREATE DATABASE jugos;
+DROP SCHEMA jugos;
 
 
 # UNIDAD 3
 
+# 3.2 Creando la primera tabla
 USE JUGOS;
 
 CREATE TABLE TBCLIENTES( # Crea una tabla TBCLIENTES en jugos
@@ -41,16 +49,6 @@ LIMITE_CREDITO FLOAT,
 VOLUMEN_COMPRA FLOAT,
 PRIMERA_COMPRA BIT(1));
 
-DROP TABLE TBCLIENTES3; # Elimina la tabla TBCLIENTES3 en jugos
-
-CREATE TABLE `jugos`.`tbproductos` ( # Crea una tabla TBPRODUCTOS en jugos con el asistante de Workbench
-  `producto` VARCHAR(20) NULL,
-  `nombre` VARCHAR(150) NULL,
-  `envase` VARCHAR(50) NULL,
-  `volumen` VARCHAR(20) NULL,
-  `sabor` VARCHAR(50) NULL,
-  `precio` FLOAT NULL);
-
 CREATE TABLE tbproductos # Crea una tabla TBPRODUCTOS en jugos
 (PRODUCTO VARCHAR (20) ,
 NOMBRE VARCHAR (150) ,
@@ -59,6 +57,36 @@ VOLUMEN VARCHAR (50) ,
 SABOR VARCHAR (50) ,
 PRECIO FLOAT);
 
+# 3.3 Creando la tabla con el asistente
+CREATE TABLE `jugos`.`tbproductos` ( # Crea una tabla TBPRODUCTOS en jugos con el asistante de Workbench
+  `producto` VARCHAR(20) NULL,
+  `nombre` VARCHAR(150) NULL,
+  `envase` VARCHAR(50) NULL,
+  `volumen` VARCHAR(20) NULL,
+  `sabor` VARCHAR(50) NULL,
+  `precio` FLOAT NULL);
+
+# 3.4 Eliminando las tablas
+USE JUGOS;
+
+CREATE TABLE TBCLIENTES3(
+DNI VARCHAR(20),
+NOMBRE VARCHAR(150),
+DIRECCION1 VARCHAR(150),
+DIRECCION2 VARCHAR(150),
+BARRIO VARCHAR(50),
+CIUDAD VARCHAR(50),
+ESTADO VARCHAR(50),
+CP VARCHAR(10),
+EDAD SMALLINT,
+SEXO VARCHAR(1),
+LIMITE_CREDITO FLOAT,
+VOLUMEN_COMPRA FLOAT,
+PRIMERA_COMPRA BIT(1));
+
+DROP TABLE TBCLIENTES3; # Elimina la tabla TBCLIENTES3 en jugos
+
+# 3.5 - Tabla de vendedores
 CREATE TABLE TABLA_DE_VENDEDORES (
     MATRICULA varchar(5), 
     NOMBRE varchar(100), 
@@ -74,6 +102,7 @@ DROP TABLE TABLA_DE_VENDEDORES2;
 
 # UNIDAD 4
 
+# 4.1 Insertando registros en la tabla
 USE jugos;
 
 INSERT INTO tbproductos( # Inserta registros en la tabla tbproductos
@@ -83,6 +112,7 @@ precio) VALUES ('773912', 'clean', 'botella pet',
 
 SELECT * FROM tbproductos;
 
+# 4.2 Insertando varios registros en la tabla
 USE jugos;
 
 INSERT INTO tbproductos(
@@ -100,13 +130,13 @@ precio) VALUES ('8128292', 'clean', 'latat',
 
 SELECT * FROM tbproductos;
 
+# 4.3 Alterando registros
 USE jugos;
 
 INSERT INTO tbproductos(
 producto, nombre, envase, volumen, sabor,
 precio) VALUES ('695594', 'Festival de Sabores', 'Botella PET',
 '1.5 Litros', 'Asaí', 18.51);
-
 INSERT INTO tbproductos(
 producto, nombre, envase, volumen, sabor,
 precio) VALUES ('1041119', 'Línea Citrus', 'Botella de Vidrio',
@@ -116,19 +146,18 @@ SELECT * FROM tbproductos;
 
 UPDATE tbproductos SET producto = '812829', envase = 'lata' # Altera el campo producto de la tabla tbproductos cuyo volumen es 350 ml
 WHERE volumen = '350 ml';
-
 UPDATE tbproductos SET precio = 28.51
 WHERE producto = '695594';
-
 UPDATE tbproductos SET sabor = 'Lima/Limón', precio = 4.90
 WHERE producto = '1041119';
 
 SELECT * FROM tbproductos;
 
+# 4.4 Excluyendo registros
 SELECT * FROM tbproductos;
-
 DELETE FROM tbproductos WHERE producto = '773912'; # Elimina / excluye el registro de la tabla tbproductos cuyo producto es 773912
 
+# 4.5 Incluyendo la clave primaria
 USE jugos;
 
 INSERT INTO tbproductos(
@@ -141,10 +170,10 @@ SELECT * FROM tbproductos;
 ALTER TABLE tbproductos ADD PRIMARY KEY(PRODUCTO); # Declara el campo producto como clave primaria de la tabla tbproductos
 # La clave primaria es muy útil para evitar la duplicidad en los registros y para garantizar la integridad de los datos.
 
+# 4.6 Manipulando fechas y campos lógicos
 USE jugos;
 
 ALTER TABLE tbclientes ADD PRIMARY KEY (DNI); # Declara el campo DNI como clave primaria de la tabla tbclientes
-
 ALTER TABLE tbclientes ADD COLUMN(FECHA_NACIMIENTO DATE); # Agrega la columna FECHA_NACIMIENTO a la tabla tbclientes
 
 INSERT INTO tbclientes(
@@ -167,16 +196,15 @@ FECHA_NACIMIENTO) VALUES(
 
 SELECT * FROM tbclientes;
 
+# 4.7 - Tabla de vendedores
 INSERT INTO TABLA_DE_VENDEDORES # Incluyendo el primer vendedor
 (MATRICULA, NOMBRE, PORCENTAJE_COMISION)
 VALUES
 ('00233', 'Joan Geraldo de la Fonseca', 0.10);
-
 INSERT INTO TABLA_DE_VENDEDORES # Incluyendo dos vendedores más
 (MATRICULA, NOMBRE, PORCENTAJE_COMISION)
 VALUES
  ('00235','Márcio Almeida Silva',0.08);
-
 INSERT INTO TABLA_DE_VENDEDORES
 (MATRICULA, NOMBRE, PORCENTAJE_COMISION)
 VALUES
@@ -184,7 +212,6 @@ VALUES
 
 UPDATE TABLA_DE_VENDEDORES SET PORCENTAJE_COMISION = 0.11 # Actualizando la información de los vendedores
 WHERE MATRICULA = '00236';
-
 UPDATE TABLA_DE_VENDEDORES SET NOME = 'Joan Geraldo de la Fonseca Junior'
 WHERE MATRICULA = '00233';
 
@@ -203,20 +230,18 @@ ALTER TABLE TABLA_DE_VENDEDORES ADD PRIMARY KEY (MATRICULA);
 
 INSERT INTO TABLA_DE_VENDEDORES
 (MATRICULA, NOMBRE, FECHA_ADMISION, PORCENTAJE_COMISION, DE_VACACIONES) VALUES ('00235','Márcio Almeida Silva','2014-08-15',0.08,0);
-
 INSERT INTO TABLA_DE_VENDEDORES
 (MATRICULA, NOMBRE, FECHA_ADMISION, PORCENTAJE_COMISION, DE_VACACIONES) VALUES ('00236','Cláudia Morais','2013-09-17',0.08,1);
-
 INSERT INTO TABLA_DE_VENDEDORES
 (MATRICULA, NOMBRE, FECHA_ADMISION, PORCENTAJE_COMISION, DE_VACACIONES) VALUES ('00238','Pericles Alves','2016-08-21',0.11,0);
 
 
 # UNIDAD 5
                    
+# 5.1 Incluyendo datos en la tabla
 USE jugos;
 
 DROP TABLE tbclientes;
-
 DROP TABLE tbproductos;
 
 CREATE TABLE tbcliente
@@ -296,85 +321,63 @@ INSERT INTO tbProducto (PRODUCTO, NOMBRE, TAMANO, SABOR, ENVASE, PRECIO_LISTA) V
 INSERT INTO tbProducto (PRODUCTO, NOMBRE, TAMANO, SABOR, ENVASE, PRECIO_LISTA) VALUES ('290478', 'Vida del Campo', '350 ml', 'Sandía', 'Lata', 4.56);
 INSERT INTO tbProducto (PRODUCTO, NOMBRE, TAMANO, SABOR, ENVASE, PRECIO_LISTA) VALUES ('1002767', 'Vida del Campo', '700 ml', 'Cereza/Manzana', 'Botella de Vidrio', 8.41);
 
+# 5.2 Filtrando registros
 SELECT * FROM tbcliente; # Selecciona todos los registros de la tabla tbcliente
-
 SELECT DNI, NOMBRE, DIRECCION1, DIRECCION2, BARRIO, CIUDAD, ESTADO,CP, FECHA_NACIMIENTO, EDAD, 
 SEXO, LIMITE_CREDITO, VOLUMEN_COMPRA, PRIMERA_COMPRA FROM tbcliente; # Selecciona todos los registros de la tabla tbcliente
 
 SELECT DNI, NOMBRE FROM tbcliente;
-
 SELECT NOMBRE, SEXO, EDAD, DIRECCION1 FROM tbcliente;
-
 SELECT NOMBRE AS Nombre_Completo, SEXO AS Género, EDAD AS Años, DIRECCION1 AS Domicilio FROM tbcliente; # Alias
-
 SELECT NOMBRE, SEXO, EDAD, DIRECCION1 FROM tbcliente LIMIT 6;
 
 SELECT * FROM tbproducto;
-
 SELECT * FROM tbproducto WHERE SABOR = 'Maracuyá';
-
 SELECT * FROM tbproducto WHERE ENVASE = 'Botella de Vidrio';
 
 UPDATE tbproducto SET SABOR = 'Cítrico' WHERE SABOR = 'Limón';
-
 SELECT * FROM tbproducto WHERE SABOR = 'Limón'; # Ya no me muestra nada porque reemplacé limón por cítrico
-
 SELECT * FROM tbproducto WHERE SABOR = 'Cítrico';
 
+# 5.3 Filtrando usando mayor que menor que y diferente
 SELECT * FROM tbcliente;
 
 SELECT * FROM tbcliente WHERE EDAD > 27;
-
 SELECT * FROM tbcliente WHERE EDAD < 27;
-
 SELECT * FROM tbcliente WHERE EDAD <= 27;
-
 SELECT * FROM tbcliente WHERE EDAD <> 26; # Todos los registros que no son iguales a 26
 
 SELECT * FROM tbcliente WHERE  NOMBRE > 'Erica Carvajo'; # Todos los registros que vienen después de Erica Carvajo alfabeticamente
-
 SELECT * FROM tbcliente WHERE  NOMBRE < 'Erica Carvajo';
-
 SELECT * FROM tbcliente WHERE  NOMBRE <= 'Erica Carvajo';
 
 SELECT * FROM tbproducto;
 
 SELECT * FROM tbproducto WHERE PRECIO_LISTA = 28.51; # No devuelve ninguno, a pesar de haber un registro 28.51
-
 SELECT * FROM tbproducto WHERE PRECIO_LISTA > 28.51; # Ahora si lo devuelve, porque lo considera mayor a 28.51
-
 SELECT * FROM tbproducto WHERE PRECIO_LISTA < 28.51;
-
 SELECT * FROM tbproducto WHERE PRECIO_LISTA BETWEEN 28.49 AND 28.52;
 
+# 5.4 Filtrando fechas
 SELECT * FROM tbcliente;
 
 SELECT * FROM tbcliente WHERE FECHA_NACIMIENTO = '1995-01-13';
-
 SELECT * FROM tbcliente WHERE FECHA_NACIMIENTO < '1995-01-13';
-
 SELECT * FROM tbcliente WHERE FECHA_NACIMIENTO >= '1995-01-13';
-
 SELECT * FROM tbcliente WHERE YEAR(FECHA_NACIMIENTO) = 1995;
-
 SELECT * FROM tbcliente WHERE DAY(FECHA_NACIMIENTO) = 20;
 
-# Filtros compuestos
+# 5.5 Filtros compuestos
 SELECT * FROM tbproducto;
 
 SELECT * FROM tbproducto WHERE PRECIO_LISTA BETWEEN 28.49 AND 28.52;
-
 SELECT * FROM tbproducto WHERE PRECIO_LISTA >= 28.49 AND  PRECIO_LISTA <=28.52;
-
 SELECT * FROM tbproducto WHERE ENVASE = 'Lata' OR ENVASE = 'Botella PET';
-
 SELECT * FROM tbproducto WHERE PRECIO_LISTA >= 15 AND  PRECIO_LISTA <=25;
-
 SELECT * FROM tbproducto WHERE (PRECIO_LISTA >= 15 AND  PRECIO_LISTA <=25) OR (ENVASE = 'Lata' OR ENVASE = 'Botella PET');
-
 SELECT * FROM tbproducto WHERE (PRECIO_LISTA >= 15 AND  TAMANO = '1 Litro') OR (ENVASE = 'Lata' OR ENVASE = 'Botella PET');
 
-# Tabla vendedores 
+# 5.6 - Tabla de vendedores 
 SELECT NOMBRE, MATRICULA FROM TABLA_DE_VENDEDORES; # Seleccionando a todos los vendedores
 SELECT * FROM TABLA_DE_VENDEDORES WHERE NOMBRE = 'Claudia Morais'; # Seleccionando a un vendedor
 SELECT * FROM TABLA_DE_VENDEDORES WHERE PORCENTAJE_COMISION > 0.10; # Seleccionando vendedores por el valor de la comisión
