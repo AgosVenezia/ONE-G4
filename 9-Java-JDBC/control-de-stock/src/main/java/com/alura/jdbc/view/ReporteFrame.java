@@ -33,6 +33,7 @@ public class ReporteFrame extends JFrame {
         modelo.addColumn("");
         modelo.addColumn("");
         modelo.addColumn("");
+        modelo.addColumn("");
 
         cargaReporte();
 
@@ -42,19 +43,24 @@ public class ReporteFrame extends JFrame {
     }
 
     private void cargaReporte() {
-        var categorias = categoriaController.cargaReporte();
+        var contenido = categoriaController.cargaReporte();
+        //var categorias = categoriaController.cargaReporte();
 
-        categorias.forEach(categoria -> {
-            modelo.addRow(new Object[] { categoria });
-            
-            var productos = categoria.getProductos();
-            
-            productos.forEach(producto -> modelo.addRow(new Object[] {
-                    "",
-                    producto.getNombre(),
-                    producto.getCantidad()
-            }));
-        });
+        contenido.forEach(fila -> modelo
+               .addRow(new Object[] {}));
     }
+        
+        //categorias.forEach(categoria -> {
+            //modelo.addRow(new Object[] { categoria });
+            
+            //var productos = categoria.getProductos();
+            
+            //productos.forEach(producto -> modelo.addRow(new Object[] {
+                    //"",
+                    //producto.getNombre(),
+                    //producto.getCantidad()
+            //}));
+        //});
+    //}
 
 }
