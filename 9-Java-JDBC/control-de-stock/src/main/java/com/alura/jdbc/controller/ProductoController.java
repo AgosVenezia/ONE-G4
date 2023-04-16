@@ -3,6 +3,7 @@ package com.alura.jdbc.controller;
 import java.util.List;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 //import java.sql.DriverManager;
 /*
@@ -21,6 +22,8 @@ import java.util.Map;
 import com.alura.jdbc.factory.ConnectionFactory;
 //import com.alura.jdbc.modelo.Categoria;
 //import com.alura.jdbc.modelo.Producto;
+
+//import com.alura.jdbc.CreaConexion;
 
 public class ProductoController {
 
@@ -60,9 +63,11 @@ public class ProductoController {
 
         Statement statement = con.createStatement();
         
+        // El método execute devuelve true cuando el resultado devuelve un java.sql.ResultSet (resultado de un SELECT) y false cuando el resultado no devuelve contenido (resultado de un DELETE, UPDATE o DELETE).
         statement.execute("DELETE FROM PRODUCTO WHERE ID = " + id);
         
         int updateCount = statement.getUpdateCount();
+        // Para saber si algo fue realmente eliminado hay un método que es el statement.getUpdateCount. Esto nos va a devolver un Int que voy a asignarlo a una variable que es un UpdateCount, y este número del tipo Int nos devuelve cuántas filas fueron modificadas luego que ejecutamos el comando de SQL en el statement
         
         con.close();
         
@@ -74,11 +79,13 @@ public class ProductoController {
     //}
 
     /*public List<Map<String, String>> listar() throws SQLException {
-        Connection con = DriverManager.getConnection(
-            "jdbc:mysql://localhost/control_de_stock?useTimeZone=true&serverTimeZone=UTC", 
-            "root", 
-            "codoacodo");
+        //Connection con = DriverManager.getConnection(
+            //"jdbc:mysql://localhost/control_de_stock?useTimeZone=true&serverTimeZone=UTC", 
+            //"root", 
+            //"codoacodo");
         // Para abrir una conexión con la base de datos debemos utilizar el método getConnection de la clase DriverManager. El método getConnection recibe tres parámetros. Son ellos la URL de conexión JDBC, el usuario y la contraseña.
+
+        Connection con = new CreaConexion().recuperaConexion();
 
         Statement statement = con.createStatement();
 
@@ -108,8 +115,10 @@ public class ProductoController {
         Connection con = factory.recuperaConexion();
 
         Statement statement = con.createStatement();
+
         statement.execute("SELECT ID, NOMBRE, DESCRIPCION, CANTIDAD FROM PRODUCTO");
 
+        // Para tomar el resultado del statement tenemos que ejecutar otro comando del statement, en el propio statement.getResultSet. Este método nos devuelve un objeto del tipo ResultSet.
         ResultSet resultSet = statement.getResultSet();
 
         List<Map<String, String>> resultado = new ArrayList<>();
@@ -134,22 +143,44 @@ public class ProductoController {
     //}
 
     public void guardar(Map<String, String> producto) throws SQLException {
+        //Connection con = new ConnectionFactory().recuperaConexion();        
         ConnectionFactory factory = new ConnectionFactory();
         Connection con = factory.recuperaConexion();
 
-        Statement statement = con.createStatement();
-        statement.execute(
-                "INSERT INTO PRODUCTO (nombre, descripcion, cantidad)"
-                        + " VALUES ('" + producto.get("NOMBRE") + "', '"
-                        + producto.get("DESCRIPCION") + "', '" + producto.get("CANTIDAD") + "')",
-                        Statement.RETURN_GENERATED_KEYS);
+        //Statement statement = con.createStatement();
+        /*statement.execute(
+            "INSERT INTO PRODUCTO (nombre, descripcion, cantidad)"
+                + " VALUES ('" + producto.get("NOMBRE") + "', '"
+                + producto.get("DESCRIPCION") + "', '" 
+                + producto.get("CANTIDAD") + "')",
+                Statement.RETURN_GENERATED_KEYS);
+        // Entonces en el VALUES tenemos la comilla simple para señalar que es un string adentro del string de SQL. Y las comillas simples en SQL señalan un string, y acá en Java son las comillas dobles las que señalan un string.*/
+
+        /*String sqlInsert = "INSERT INTO PRODUCTO (nombre, descripcion, cantidad)"
+                + " VALUES ('" + producto.get("NOMBRE") + "', '"
+                + producto.get("DESCRIPCION") + "', '" 
+                + producto.get("CANTIDAD") + "')";
         
+        System.out.println(sqlInsert);*/
+
+        // Statement se utiliza para ejecutar consultas SQL basadas en cadenas. PreparedStatement mantiene la query compilada en la base de datos, de forma parametrizada. Así el usuario puede ejecutar la misma consulta diversas veces con parámetros distintos.
+        PreparedStatement statement = con.prepareStatement("INSERT INTO PRODUCTO "
+            + "(nombre, descripcion, cantidad)" 
+            + " VALUES (?, ?, ?)",
+            Statement.RETURN_GENERATED_KEYS);
+        statement.setString(1, producto.get("NOMBRE"));
+        statement.setString(2, producto.get("DESCRIPCION"));
+        statement.setInt(3, Integer.valueOf(producto.get("CANTIDAD")));
+
+        statement.execute();
+
         ResultSet resultSet = statement.getGeneratedKeys();
         
+        // El resultado nos provee una forma de ir hasta el próximo elemento del resultado, hasta que lleguemos al final. El recurso que nos provee resultSet es un método llamado acá resultSet.next().
         while(resultSet.next()) {
             System.out.println(String.format(
-                    "Fue insertado el producto de ID: %d",
-                    resultSet.getInt(1)));
+                "Fue insertado el producto de ID: %d",
+                resultSet.getInt(1)));
         }
     }
     

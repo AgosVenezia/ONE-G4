@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 //import com.mchange.v2.c3p0.ComboPooledDataSource;
 
+// Para simplificar y encapsular la creación de la conexión debemos utilizar una clase ConnectionFactory. Esta clase sigue el estándar de creación Factory Method, que encapsula la creación de un objeto.
 public class ConnectionFactory {
     
     //private DataSource dataSource;
@@ -38,3 +39,5 @@ public class ConnectionFactory {
     //}
 
 }
+
+// Patrón de diseño llamado factory method. El factory method tiene como objetivo encapsular el código de creación de un objeto específico, centralizando la lógica en un solo punto. La clase crea conexión, es una fábrica de conexiones. Entonces, siempre que la llamamos es porque queremos crear una conexión.
