@@ -38,13 +38,25 @@ public class ProductoController {
         ConnectionFactory factory = new ConnectionFactory();
         Connection con = factory.recuperaConexion();
 
-        Statement statement = con.createStatement();
+        PreparedStatement statement = con.prepareStatement("UPDATE PRODUCTO SET "
+                + " NOMBRE = ? "
+                + ", DESCRIPCION = ? "
+                + ", CANTIDAD = ? "
+                + " WHERE ID = ?");
+        statement.setString(1, nombre);
+        statement.setString(2, descripcion);
+        statement.setInt(3, cantidad);
+        statement.setInt(4, id);
+
+        statement.execute();
+        
+        /*Statement statement = con.createStatement();
         
         statement.execute("UPDATE PRODUCTO SET "
                 + " NOMBRE = '" + nombre + "'"
                 + ", DESCRIPCION = '" + descripcion + "'"
                 + ", CANTIDAD = " + cantidad
-                + " WHERE ID = " + id);
+                + " WHERE ID = " + id);*/
         
         int updateCount = statement.getUpdateCount();
         
@@ -61,10 +73,14 @@ public class ProductoController {
         ConnectionFactory factory = new ConnectionFactory();
         Connection con = factory.recuperaConexion();
 
-        Statement statement = con.createStatement();
+        PreparedStatement statement = con.prepareStatement("DELETE FROM PRODUCTO WHERE ID = ?");
+        statement.setInt(1, id);
+
+        statement.execute();
+        //Statement statement = con.createStatement();
         
         // El método execute devuelve true cuando el resultado devuelve un java.sql.ResultSet (resultado de un SELECT) y false cuando el resultado no devuelve contenido (resultado de un DELETE, UPDATE o DELETE).
-        statement.execute("DELETE FROM PRODUCTO WHERE ID = " + id);
+        //statement.execute("DELETE FROM PRODUCTO WHERE ID = " + id);
         
         int updateCount = statement.getUpdateCount();
         // Para saber si algo fue realmente eliminado hay un método que es el statement.getUpdateCount. Esto nos va a devolver un Int que voy a asignarlo a una variable que es un UpdateCount, y este número del tipo Int nos devuelve cuántas filas fueron modificadas luego que ejecutamos el comando de SQL en el statement
@@ -114,9 +130,11 @@ public class ProductoController {
         ConnectionFactory factory = new ConnectionFactory();
         Connection con = factory.recuperaConexion();
 
-        Statement statement = con.createStatement();
-
-        statement.execute("SELECT ID, NOMBRE, DESCRIPCION, CANTIDAD FROM PRODUCTO");
+        PreparedStatement statement = con.prepareStatement("SELECT ID, NOMBRE, DESCRIPCION, CANTIDAD FROM PRODUCTO");
+        statement.execute();
+        
+        //Statement statement = con.createStatement();
+        //statement.execute("SELECT ID, NOMBRE, DESCRIPCION, CANTIDAD FROM PRODUCTO");
 
         // Para tomar el resultado del statement tenemos que ejecutar otro comando del statement, en el propio statement.getResultSet. Este método nos devuelve un objeto del tipo ResultSet.
         ResultSet resultSet = statement.getResultSet();
@@ -143,9 +161,18 @@ public class ProductoController {
     //}
 
     public void guardar(Map<String, String> producto) throws SQLException {
+        String nombre = producto.get("NOMBRE");
+        String descripcion = producto.get("DESCRIPCION");
+        Integer cantidad = Integer.valueOf(producto.get("CANTIDAD"));
+        Integer maximoCantidad = 50;
+        
         //Connection con = new ConnectionFactory().recuperaConexion();        
         ConnectionFactory factory = new ConnectionFactory();
         Connection con = factory.recuperaConexion();
+        con.setAutoCommit(false);
+        /*
+        Para cada ejecución del Insert la aplicación está abriendo una transacción para guardar los datos, devuelve el resultSet y cierra la transacción. El tema es que cuando es lanzada una excepción, parte de la información es guardada y la otra parte es perdida. ¿Cuál es el estándar de JDBC (del driver) para manejar transacciones de base de datos?: Auto-Commit. Este es el estándar, que puede ser modificado por el método setAutoCommit, de la interfaz Connection.
+        */
 
         //Statement statement = con.createStatement();
         /*statement.execute(
@@ -168,16 +195,63 @@ public class ProductoController {
             + "(nombre, descripcion, cantidad)" 
             + " VALUES (?, ?, ?)",
             Statement.RETURN_GENERATED_KEYS);
-        statement.setString(1, producto.get("NOMBRE"));
-        statement.setString(2, producto.get("DESCRIPCION"));
-        statement.setInt(3, Integer.valueOf(producto.get("CANTIDAD")));
+
+        try {
+            do {
+            int cantidadParaGuardar = Math.min (cantidad, maximoCantidad);
+
+            ejecutaRegistro(nombre, descripcion, cantidadParaGuardar, statement);
+
+            cantidad -= maximoCantidad;
+            } while (cantidad > 0);
+
+            //statement.setString(1, nombre);
+            //statement.setString(2, descripcion);
+            //statement.setInt(3, cantidad);
+
+            //statement.execute();
+
+            //ejecutaRegistro(nombre, descripcion, cantidad, statement);
+
+            /*ResultSet resultSet = statement.getGeneratedKeys();
+        
+            // El resultado nos provee una forma de ir hasta el próximo elemento del resultado, hasta que lleguemos al final. El recurso que nos provee resultSet es un método llamado acá resultSet.next().
+            while(resultSet.next()) {
+                System.out.println(String.format(
+                    "Fue insertado el producto de ID: %d",
+                    resultSet.getInt(1)));
+            }*/
+        
+            con.commit();
+            System.out.println("COMMIT");
+        } catch (Exception e) {
+            con.rollback();
+            System.out.println("ROLLBACK");
+        }
+
+        statement.close();
+
+        con.close();
+    }
+
+    /*
+    Cuando trabajamos con el control manual de una transacción, o sea con el AutoCommit(false); nosotros tenemos que agregar explícitamente el comando de commit en el código. El comando con.commit lo vamos a agregar afuera del bloque de do while. Y va a ser acá con.commit(); para garantizar que todos los comandos del loop hayan sido ejecutados correctamente. O sea, si la ejecución acá tiene un error, él ejecuta registro o cualquier cosa que hay acá dentro del try tiene un error, vamos a caer en el catch, nosotros vamos a hacer un rollback de la transacción, vamos a cerrar la conexión y no hay ningún problema. Nosotros cancelamos la ejecución de estas transacciones.
+    */
+
+    private void ejecutaRegistro(String nombre, String descripcion, Integer cantidad, PreparedStatement statement) throws SQLException {
+        if (cantidad < 50) {
+            throw new RuntimeException("Ocurrió un error");
+        }
+        
+        statement.setString(1, nombre);
+        statement.setString(2, descripcion);
+        statement.setInt(3, cantidad);
 
         statement.execute();
 
         ResultSet resultSet = statement.getGeneratedKeys();
-        
-        // El resultado nos provee una forma de ir hasta el próximo elemento del resultado, hasta que lleguemos al final. El recurso que nos provee resultSet es un método llamado acá resultSet.next().
-        while(resultSet.next()) {
+
+        while (resultSet.next()) {
             System.out.println(String.format(
                 "Fue insertado el producto de ID: %d",
                 resultSet.getInt(1)));
