@@ -63,7 +63,10 @@ public class Producto {
     public String toString() {
         return String.format(
                 "{ id: %d, nombre: %s, descripcion: %s, cantidad: %d }",
-                this.id, this.nombre, this.descripcion, this.cantidad);
+                this.id, 
+                this.nombre, 
+                this.descripcion, 
+                this.cantidad);
     }
 
 }

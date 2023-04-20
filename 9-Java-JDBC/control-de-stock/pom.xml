@@ -24,7 +24,9 @@
 			<artifactId>c3p0</artifactId>
 			<version>0.9.5.5</version>
 		</dependency>
-
+		<!-- 
+		C3P0 nos va a dar la posibilidad de configurar un pool de conexiones y mchange-commons-java nos va a dar la posibilidad de agregar más detalles del datasource vía el log de la aplicación en la consola. La única diferencia es que en lugar de estar creando una conexión por el driver manager, nosotros estamos tomando la conexión desde el pool para realizar las operaciones en la base de datos.
+		-->
 		<dependency>
 			<groupId>com.mchange</groupId>
 			<artifactId>mchange-commons-java</artifactId>
