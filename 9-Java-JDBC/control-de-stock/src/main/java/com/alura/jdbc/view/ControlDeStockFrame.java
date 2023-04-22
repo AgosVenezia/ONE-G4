@@ -133,7 +133,12 @@ public class ControlDeStockFrame extends JFrame {
     private void configurarAccionesDelFormulario() {
         botonGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                guardar();
+                try {
+                    guardar();
+                } catch (SQLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
                 limpiarTabla();
                 cargarTabla();
             }
@@ -231,24 +236,30 @@ public class ControlDeStockFrame extends JFrame {
     }
 
     private void cargarTabla() {
-        List<Map<String, String>> productos = new ArrayList<Map<String, String>>();
-
-        try {
+        //List<Map<String, String>> productos = new ArrayList<Map<String, String>>();
+        var productos = this.productoController.listar();
+        
+        /*try {
             productos = this.productoController.listar();
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
-        }
+        }*/
 
         productos.forEach(producto -> modelo.addRow(
                 new Object[] {
-                        producto.get("ID"),
+                        /*producto.get("ID"),
                         producto.get("NOMBRE"),
                         producto.get("DESCRIPCION"),
-                        producto.get("CANTIDAD") }));
+                        producto.get("CANTIDAD") }));*/
+                        producto.getId(),
+                        producto.getNombre(),
+                        producto.getDescripcion(),
+                        producto.getCantidad(),
+                }));
     }
 
-    private void guardar() {
+    private void guardar() throws SQLException {
         if (textoNombre.getText().isBlank() || textoDescripcion.getText().isBlank()) {
             JOptionPane.showMessageDialog(this, "Los campos Nombre y Descripción son requeridos.");
             return;
@@ -275,12 +286,12 @@ public class ControlDeStockFrame extends JFrame {
         
         var categoria = comboCategoria.getSelectedItem();
 
-        try {
-            this.productoController.guardar(producto);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+        //try {
+        this.productoController.guardar(producto);
+        //} catch (SQLException e) {
+            //e.printStackTrace();
+            //throw new RuntimeException(e);
+        //}
 
         JOptionPane.showMessageDialog(this, "Registrado con éxito!");
 
