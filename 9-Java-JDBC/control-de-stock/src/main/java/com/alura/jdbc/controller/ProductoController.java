@@ -2,8 +2,8 @@ package com.alura.jdbc.controller;
 
 import java.util.List;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+//import java.sql.Connection;
+//import java.sql.PreparedStatement;
 
 //import java.sql.DriverManager;
 /*
@@ -11,17 +11,17 @@ Para acceder a una base de datos necesitamos del driver de conexión.
 JDBC significa Java DataBase Connectivity. El JDBC define una capa de abstracción entre la aplicación y el driver de la base de datos. Esta capa es compuesta de interfaces que el driver implementa.
 */
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+//import java.sql.ResultSet;
+//import java.sql.SQLException;
+//import java.sql.Statement;
+//import java.util.ArrayList;
+//import java.util.HashMap;
+//import java.util.Map;
 
 import com.alura.jdbc.dao.ProductoDAO;
 //import com.alura.jdbc.dao.ProductoDAO;
 import com.alura.jdbc.factory.ConnectionFactory;
-//import com.alura.jdbc.modelo.Categoria;
+import com.alura.jdbc.modelo.Categoria;
 //import com.alura.jdbc.modelo.Producto;
 import com.alura.jdbc.modelo.Producto;
 
@@ -32,21 +32,22 @@ public class ProductoController {
     private ProductoDAO productoDAO;
     
     public ProductoController() {
-        //var factory = new ConnectionFactory();
-        //this.productoDAO = new ProductoDAO(factory.recuperaConexion());
-        this.productoDAO = new ProductoDAO(new ConnectionFactory().recuperaConexion());
+        var factory = new ConnectionFactory();
+        this.productoDAO = new ProductoDAO(factory.recuperaConexion());
+        //this.productoDAO = new ProductoDAO(new ConnectionFactory().recuperaConexion());
     }
 
-    public int modificar(String nombre, String descripcion, Integer cantidad, Integer id) throws SQLException {
-        ConnectionFactory factory = new ConnectionFactory();
-        final Connection con = factory.recuperaConexion();
+    public int modificar(String nombre, String descripcion, Integer cantidad, Integer id) {
+        return productoDAO.modificar(nombre, descripcion, cantidad, id);
+        //ConnectionFactory factory = new ConnectionFactory();
+        //final Connection con = factory.recuperaConexion();
 
 /*
 El Try With Resources nos permite declarar recursos que van a ser utilizados en un bloque de try catch con la certeza de que estos recursos van a ser cerrados o finalizados automáticamente después de la ejecución del bloque. Como estas interfaces extienden la interfaz AutoCloseable, el try-with-resources ejecuta el comando close implícitamente. Un requisito para eso es que estos recursos deben implementar la interfaz autoCloseable. Esos bloques aún pueden tener los bloques de catch y final para trabajar en algún manejo de excepción como el rollback que estamos haciendo en nuestro método de registro de productos.
 
 Para garantizar el cierre de los recursos abiertos en el código, Java provee un recurso llamado try-with-resources para ayudarnos. Para utilizar este recurso es necesario que la clase utilizada (como la Connection) implemente la interfaz Autocloseable.
 */
-        try (con) {
+        /*try (con) {
             final PreparedStatement statement = con.prepareStatement("UPDATE PRODUCTO SET "
                     + " NOMBRE = ? "
                     + ", DESCRIPCION = ? "
@@ -59,7 +60,7 @@ Para garantizar el cierre de los recursos abiertos en el código, Java provee un
                 statement.setInt(3, cantidad);
                 statement.setInt(4, id);
 
-                statement.execute();
+                statement.execute();*/
                 
                 /*Statement statement = con.createStatement();
                 
@@ -69,21 +70,22 @@ Para garantizar el cierre de los recursos abiertos en el código, Java provee un
                         + ", CANTIDAD = " + cantidad
                         + " WHERE ID = " + id);*/
                 
-                int updateCount = statement.getUpdateCount();
+                /*int updateCount = statement.getUpdateCount();
                 
                 con.close();
                 
                 return updateCount;
         }
-    }
+    }*/
 }
     
     //public int modificar(String nombre, String descripcion, Integer cantidad, Integer id) {
-        //return productoDao.modificar(nombre, descripcion, cantidad, id);
+        //return productoDAO.modificar(nombre, descripcion, cantidad, id);
     //}
 
-    public int eliminar(Integer id) throws SQLException {
-        ConnectionFactory factory = new ConnectionFactory();
+    public int eliminar(Integer id) {
+        return productoDAO.eliminar(id);
+        /*ConnectionFactory factory = new ConnectionFactory();
         final Connection con = factory.recuperaConexion();
 
         try (con) {
@@ -106,11 +108,11 @@ Para garantizar el cierre de los recursos abiertos en el código, Java provee un
         
                 return updateCount;
             }
-        }
+        }*/
     }
     
     //public int eliminar(Integer id) {
-        //return productoDao.eliminar(id);
+        //return productoDAO.eliminar(id);
     //}
 
     /*public List<Map<String, String>> listar() throws SQLException {
@@ -188,11 +190,11 @@ Para garantizar el cierre de los recursos abiertos en el código, Java provee un
     }
     
     //public List<Producto> listar() {
-        //return productoDao.listar();
+        //return productoDAO.listar();
     //}
 
     //public void guardar(Map<String, String> producto) throws SQLException {
-    public void guardar(Producto producto) {
+    public void guardar(Producto producto, Integer categoriaid) {
         /*String nombre = producto.get("NOMBRE");
         String descripcion = producto.get("DESCRIPCION");
         Integer cantidad = Integer.valueOf(producto.get("CANTIDAD"));
@@ -290,9 +292,9 @@ Las bases de datos ofrecen un recurso llamado transacción, que junta muchas ope
 */
     //ProductoDAO productoDAO = new ProductoDAO(new ConnectionFactory().recuperaConexion()); // SÓLO ESTAS LÍNEAS SON NECESARIAS PARA "PUBLIC GUARDAR"
     //new ProductoDAO(new ConnectionFactory().recuperaConexion());
+    producto.setCategoriaId(categoriaid);
     productoDAO.guardar(producto);
     }
-}
 
     /*
     Cuando trabajamos con el control manual de una transacción, o sea con el AutoCommit(false); nosotros tenemos que agregar explícitamente el comando de commit en el código. El comando con.commit lo vamos a agregar afuera del bloque de do while. Y va a ser acá con.commit(); para garantizar que todos los comandos del loop hayan sido ejecutados correctamente. O sea, si la ejecución acá tiene un error, él ejecuta registro o cualquier cosa que hay acá dentro del try tiene un error, vamos a caer en el catch, nosotros vamos a hacer un rollback de la transacción, vamos a cerrar la conexión y no hay ningún problema. Nosotros cancelamos la ejecución de estas transacciones.
@@ -344,7 +346,21 @@ Las bases de datos ofrecen un recurso llamado transacción, que junta muchas ope
     //}
 
     //public List<Producto> listar(Categoria categoria) {
-        //return productoDao.listar(categoria);
+        //return productoDAO.listar(categoria);
     //}
 
 //}
+
+    public List<Producto> listar(Categoria categoria) {
+        return productoDAO.listar(categoria);
+    }
+
+}
+
+/*
+Una aplicación es escrita en capas. Las capas más conocidas son las de view, controller, modelo y persistencia, que componen el estándar MVC. El flujo de una requisición entre las capas es el siguiente: view <--> controller <--> persistencia.
+
+El conjunto de clases de modelo, producto y de la clase productoDAO, forman nuestra capa de modelo, la model, que representa las entidades del negocio y realiza las operaciones sobre sus informaciones. Para este conjunto de capas le damos el nombre de modelo MVC, de Model View Controller. Este modelo es un estándar de arquitectura de aplicación que ayuda a dividir las responsabilidades de una aplicación en tres capas. Este modelo tiene como ventajas, más allá de la división de las responsabilidades, la facilidad de mantenimiento, claridad y reutilización del código.
+
+productoController, más allá de realizar esta conexión entre la vista y el modelo, también realiza las operaciones relacionadas a las reglas de negocio para completar una requisición. Entonces si nosotros tenemos aquí la entidad de producto y queremos relacionarla a una otra entidad, nosotros podremos hacer la operación directamente aquí en productoController y no impactaría la finalidad de ninguna de las otras dos capas. Así que, por más sencilla que sea la clase de productoController, su presencia tiene gran importancia justamente porque si el proyecto evoluciona, es en ella que empezaremos a agregar más lógicas de negocio.
+*/

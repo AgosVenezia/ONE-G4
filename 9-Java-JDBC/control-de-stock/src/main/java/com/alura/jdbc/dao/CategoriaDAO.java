@@ -31,6 +31,7 @@ public class CategoriaDAO {
 
             try (statement) {
                 final ResultSet resultSet = statement.executeQuery();
+                // En lugar de statement.execute, que devuelve un boolean y después hacer un statement.getResultSet para tomar los resultados, vamos a utilizar un acceso directo para ejecutar la query y ya tomar el resultado. Este método que tiene ese acceso directo se llama executeQuery.
 
                 try (resultSet) {
                     while (resultSet.next()) {

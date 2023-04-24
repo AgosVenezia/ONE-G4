@@ -27,35 +27,35 @@ public class ProductoDAO {
     
     public void guardar(Producto producto) {
         try {
-            con.setAutoCommit(false);
+            //con.setAutoCommit(false);
 
-            final PreparedStatement statement = con.prepareStatement(
+            PreparedStatement statement = con.prepareStatement(
                         "INSERT INTO PRODUCTO "
                         + "(nombre, descripcion, cantidad, categoria_id)"
                         + " VALUES (?, ?, ?, ?)", 
                         Statement.RETURN_GENERATED_KEYS);
     
             try (statement) {
-                //statement.setString(1, producto.getNombre());
-                //statement.setString(2, producto.getDescripcion());
-                //statement.setInt(3, producto.getCantidad());
-                //statement.setInt(4, producto.getCategoriaId());
+                statement.setString(1, producto.getNombre());
+                statement.setString(2, producto.getDescripcion());
+                statement.setInt(3, producto.getCantidad());
+                statement.setInt(4, producto.getCategoriaId());
     
-                //statement.execute();
+                statement.execute();
     
-                //final ResultSet resultSet = statement.getGeneratedKeys();
+                final ResultSet resultSet = statement.getGeneratedKeys();
 
-                ejecutaRegistro(producto, statement);
+                //ejecutaRegistro(producto, statement);
 
                 //con.commit();
     
-                //try (resultSet) {
-                    //while (resultSet.next()) {
-                        //producto.setId(resultSet.getInt(1));
+                try (resultSet) {
+                    while (resultSet.next()) {
+                        producto.setId(resultSet.getInt(1));
                         
-                        //System.out.println(String.format("Fue insertado el producto: %s", producto));
-                    //}
-                //}
+                        System.out.println(String.format("Fue insertado el producto: %s", producto));
+                    }
+                }
             }
         } catch (SQLException e) {
             //e.printStackTrace();
@@ -65,7 +65,7 @@ public class ProductoDAO {
         }
     }
 
-    private void ejecutaRegistro(Producto producto, PreparedStatement statement) throws SQLException {
+    /*private void ejecutaRegistro(Producto producto, PreparedStatement statement) throws SQLException {
         statement.setString(1, producto.getNombre());
         statement.setString(2, producto.getDescripcion());
         statement.setInt(3, producto.getCantidad());
@@ -73,7 +73,7 @@ public class ProductoDAO {
         
         statement.execute();
         
-    }
+    }*/
 
     public List<Producto> listar() {
         List<Producto> resultado = new ArrayList<>();
