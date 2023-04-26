@@ -29,7 +29,8 @@ public class ProductoDAO {
         try {
             //con.setAutoCommit(false);
 
-            PreparedStatement statement = con.prepareStatement(
+            PreparedStatement statement;
+                statement = con.prepareStatement(
                         "INSERT INTO PRODUCTO "
                         + "(nombre, descripcion, cantidad, categoria_id)"
                         + " VALUES (?, ?, ?, ?)", 
@@ -79,10 +80,15 @@ public class ProductoDAO {
         List<Producto> resultado = new ArrayList<>();
 
         try {
+            var querySelect = "SELECT ID, NOMBRE, DESCRIPCION, CANTIDAD FROM PRODUCTO WHERE CATEGORIA_ID = ?";
+            System.out.println(querySelect);
+
             final PreparedStatement statement = con
-                    .prepareStatement("SELECT ID, NOMBRE, DESCRIPCION, CANTIDAD FROM PRODUCTO");
-    
+                    //.prepareStatement("SELECT ID, NOMBRE, DESCRIPCION, CANTIDAD FROM PRODUCTO WHERE CATEGORIA_ID = ?");
+                    .prepareStatement(querySelect);
+
             try (statement) {
+                //statement.setInt(1, categoriaId);
                 statement.execute();
     
                 final ResultSet resultSet = statement.getResultSet();

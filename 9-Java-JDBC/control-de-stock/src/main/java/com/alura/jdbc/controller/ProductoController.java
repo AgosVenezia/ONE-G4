@@ -150,6 +150,7 @@ Para garantizar el cierre de los recursos abiertos en el código, Java provee un
     //public List<Map<String, String>> listar() throws SQLException {
     public List<Producto> listar() {
         return productoDAO.listar();
+
         //productoDAO = new ProductoDAO(new ConnectionFactory().recuperaConexion());
         
         //List<Map<String, String>> resultado = new ArrayList<>();
@@ -292,8 +293,8 @@ Las bases de datos ofrecen un recurso llamado transacción, que junta muchas ope
 */
     //ProductoDAO productoDAO = new ProductoDAO(new ConnectionFactory().recuperaConexion()); // SÓLO ESTAS LÍNEAS SON NECESARIAS PARA "PUBLIC GUARDAR"
     //new ProductoDAO(new ConnectionFactory().recuperaConexion());
-    producto.setCategoriaId(categoriaid);
-    productoDAO.guardar(producto);
+        producto.setCategoriaId(categoriaid);
+        productoDAO.guardar(producto);
     }
 
     /*

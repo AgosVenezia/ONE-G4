@@ -1,14 +1,12 @@
 package com.alura.jdbc.factory;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+//import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import javax.sql.DataSource;
-
-//import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 // Para simplificar y encapsular la creación de la conexión debemos utilizar una clase ConnectionFactory. Esta clase sigue el estándar de creación Factory Method, que encapsula la creación de un objeto.
 
@@ -27,7 +25,6 @@ public class ConnectionFactory {
     private DataSource dataSource;
     
     public ConnectionFactory() {
-        //var comboPooledDataSource = new ComboPooledDataSource();
         var comboPooledDataSource = new ComboPooledDataSource();
         comboPooledDataSource.setJdbcUrl("jdbc:mysql://localhost/control_de_stock?useTimeZone=true&serverTimeZone=UTC");
         comboPooledDataSource.setUser("root");
