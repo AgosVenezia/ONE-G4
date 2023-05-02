@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+    xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="tienda" transaction-type="RESOURCE_LOCAL">
+	<!-- 
+	El objetivo de la tag <persistence-unit>.es agrupar las configuraciones de una unidad de persistencia, que representa una base de datos utilizada por la aplicación.
+
+	Tenemos dos valores posibles para el transaction-type. “JTA” es cuando nosotros estamos utilizando un servidor externo que maneja todas esas transacciones de forma automática por nosotros. O, en el caso de nuestro proyecto, que nosotros vamos a estar manejando todas las transacciones, vamos a utilizar “RESOURCE_LOCAL”.
+	-->
+		<!--
+		En la clase de persistence tenemos que realizar otro mapeamento para Hibernate. En este caso, no tendríamos que hacerlo, pero si se está utilizando otro framework, probablemente se tenga que realizar. Y el mapeamento para indicar cuáles son las entidades que van a ser mapeadas en la base de datos es la anotación @Class, que va a indicar dónde se encuentra, dónde está la ruta de las entidades que van a ser mapeadas. En este caso sería com.latam.alura.tienda y la entidad que va a ser mapeada sería producto. Si se mapea una de las de las entidades, se tendrían que mapear todas las entidades, no mapear una y otra no. Hibernate, por default, si no se coloca esta etiqueta, él mapea todas las entidades que tengan la anotación @Entity. Si la clase no tiene esa anotación, ella va a ser desconsiderada a la hora de realizar este mapeamento.
+
+		<class>com.latam.alura.tienda.Producto</class>
+		-->
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:tienda"/>
+			<property name="javax.persistence.jdbc.user" value="sa"/>
+			<property name="javax.persistence.jdbc.password" value=""/>
+			
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<!--
+			Vamos a crear el id, el nombre, la descripción y el precio con la propiedad hibernate.hbm2ddl.auto. Nosotros tenemos algunos valores para esta propiedad. El primer valor es create, el cual indica que va a crear la base de datos, que va a crear las tablas, las columnas, va a insertar los valores y después de que haya finalizado la aplicación él va a dejar esos valores en la base de datos. Ellos van a permanecer ahí diferentemente que la aplicación esté corriendo o no. Vamos a tener create-drop, él va a crear la base de datos, va a agregar los valores y una vez que haya finalizado la aplicación va a eliminar todos los valores tanto de las tablas como de la base de datos. Vamos a tener otro valor que es validate, que no crea ni actualiza valores, simplemente verifica que los valores sean correctos, que existan esos valores, pero no agrega nuevos valores dentro de la base datos, solamente para consulta. Y tenemos “update”, que él crea la tabla en caso de que no exista y en caso de que exista él realiza las operaciones y si está faltando un nuevo elemento, él lo crea, y luego de que finaliza la aplicación, estos valores permanecen dentro de la base de datos. Ese va a ser el valor que nosotros vamos a dejar para la construcción.
+			-->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>	
+			
+			<property name="hibernate.format_sql" value="true"/>
+	
+		</properties>
+	</persistence-unit>
+</persistence>

@@ -1,0 +1,9 @@
+¿Cuáles son las principales desventajas de JDBC, para las cuales JPA fue creada? Utilizar JDBC implica escribir código de difícil soporte: los códigos que utilizan JDBC son más verbosos y eso aumenta la dificultad de mantenimiento. JDBC aumenta el acoplamiento del código: el JDBC causa un acoplamiento mayor entre el código de la aplicación y la base de datos.
+
+JDBC es un estándar de bajo nivel para interactuar con bases de datos. JPA es un estándar de alto nivel para el mismo propósito. JDBC es una API de bajo nivel, es decir, que está orientada a permitir ejecutar comandos SQL directamente y procesar los resultados obtenidos.
+
+Java creó una especificación llamada JPA, API de persistencia de Java, que es la especificación para estandarizar el mapeo relacional de objetos en el mundo Java. Con JPA crea un estándar para que no seamos rehenes de una única biblioteca. Los frameworks y las bibliotecas comenzaron a implementar JPA en el código en lugar de importar las clases e interfaces de Hibernate. Comenzamos a usar JPA que es la especificación, por lo tanto la librería se convirtió en una implementación. Y para cambiar de implementación, solo necesitamos cambiarlo en jar y una u otra configuración. Pero el código en sí permanecía intacto y sin cambios, ya que no dependía de una implementación, sino de esta especificación JPA. Para trabajar con JPA, tenemos que elegir una de estas implementaciones, es decir no podemos utilizar JPA puro, porque JPA es una capa o una abstracción únicamente. Necesitamos a alguien que implemente los detalles con lo que las bibliotecas como hibernate o EclipseLink hacen ese trabajo.
+
+¿Cuál es la diferencia entre Hibernate y JPA? JPA es una especificación y Hibernate es una de sus implementaciones.
+
+¿Cuál es la mejor definición de una entidad en JPA? Es una clase que hace el mapeamiento de una tabla del banco de datos: una entidad JPA funciona como un espejo de una tabla en el banco de datos.
