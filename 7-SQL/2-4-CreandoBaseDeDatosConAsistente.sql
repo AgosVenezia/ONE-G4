@@ -1,0 +1,1 @@
+CREATE SCHEMA `jugos2` DEFAULT CHARACTER SET utf8; # Crea una nueva base de datos jugos2 usando el asistente de Workbench
