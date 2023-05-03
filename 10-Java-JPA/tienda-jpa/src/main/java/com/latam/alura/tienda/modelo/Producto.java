@@ -1,14 +1,17 @@
 package com.latam.alura.tienda.modelo;
 
 import java.math.BigDecimal;
-//import java.time.LocalDate;
+import java.time.LocalDate;
 
 //import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.ManyToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /*
@@ -27,7 +30,6 @@ public class Producto{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
 	/*
 	Si tenemos un atributo que sea diferente tenemos que utilizar la anotación @Column pasando el parámetro name, igual y pasaríamos el nombre correcto de la tabla. Digamos que sean nombres, pasaríamos nombres. Siempre tienen que ser el mismo valor para poder realizar el mapeamento. Si no, generaría un error. En este caso podrían dejar con el mismo nombre, pero sería redundante.
 	*/
@@ -35,21 +37,25 @@ public class Producto{
 	private String nombre;
 	private String descripcion;
 	private BigDecimal precio;
-	//private LocalDate fechaDeRegistro= LocalDate.now();
-	
-	/*@ManyToOne
-	private Categoria categoria;*/
+	private LocalDate fechaDeRegistro= LocalDate.now();
+	// El método estático LocalDate.now asegura que al ser instanciado el producto se esté guardando la fecha actual en la que se está instanciando.
 
+	//@Enumerated(EnumType.STRING)
+	// No es recomendable guardar los números o un valor numérico en la base de datos ya que estos pueden ser alterados. Entonces, para darle más significancia a lo que está haciendo persistir, se guarda la palabra como string. Para eso, se utiliza la anotación de JPA @Enumerate. Esa anotación tiene un parámetro (EnumType) del tipo string que nos permite guardar la palabra que está siendo registrada en el enumerador.
+
+	@ManyToOne
+	private Categoria categoria;
+	// Siempre que exista la relación entre dos entidades o dos tablas se utiliza una anotación de JPA que es la anotación many to one o one to one, dependiendo del tipo de tipo de relación existente entre esas entidades. En este caso, nosotros vamos a tener que muchos productos están relacionados con una única categoría, por lo que utilizaremos la anotación @ManyToOne, que es muchos productos tienen una única categoría. Esto le va a permitir al cliente agregar diversos elementos de categorías que van a estar relacionados con la clase producto.
 	
 	/*public Producto() {
 		
-	}
+	}*/
 	public Producto(String nombre, String descripcion, BigDecimal precio, Categoria categoria) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.categoria = categoria;
-	}*/
+	}
 	public Long getId() {
 		return id;
 	}

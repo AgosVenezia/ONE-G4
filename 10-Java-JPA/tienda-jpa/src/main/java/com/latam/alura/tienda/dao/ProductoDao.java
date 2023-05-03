@@ -1,13 +1,14 @@
 package com.latam.alura.tienda.dao;
 
-import java.math.BigDecimal;
-import java.util.List;
+//import java.math.BigDecimal;
+//import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import com.latam.alura.tienda.modelo.Categoria;
+//import com.latam.alura.tienda.modelo.Categoria;
 import com.latam.alura.tienda.modelo.Producto;
 
+// El DAO tiene la responsabilidad de dar acceso a la base de datos, para guardar, actualizar, eliminar o para consulta de una entidad.
 public class ProductoDao {
 	
 	private EntityManager em;
@@ -30,7 +31,7 @@ public class ProductoDao {
 		this.em.remove(producto);
 	}
 	
-	public Producto consultaPorId(Long id) {
+	/*public Producto consultaPorId(Long id) {
 		return em.find(Producto.class, id);
 	}
 	
@@ -52,6 +53,6 @@ public class ProductoDao {
 	public BigDecimal consultarPrecioPorNombreDeProducto(String nombre) {
 		String jpql="SELECT P.precio FROM Producto AS P WHERE P.nombre=:nombre";
 		return em.createQuery(jpql,BigDecimal.class).setParameter("nombre", nombre).getSingleResult();
-	}
+	}*/
 
 }
