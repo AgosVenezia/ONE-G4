@@ -5,12 +5,11 @@ import java.time.LocalDate;
 
 //import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+//import javax.persistence.EnumType;
+//import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -47,15 +46,18 @@ public class Producto{
 	private Categoria categoria;
 	// Siempre que exista la relación entre dos entidades o dos tablas se utiliza una anotación de JPA que es la anotación many to one o one to one, dependiendo del tipo de tipo de relación existente entre esas entidades. En este caso, nosotros vamos a tener que muchos productos están relacionados con una única categoría, por lo que utilizaremos la anotación @ManyToOne, que es muchos productos tienen una única categoría. Esto le va a permitir al cliente agregar diversos elementos de categorías que van a estar relacionados con la clase producto.
 	
-	/*public Producto() {
+	public Producto() {
 		
-	}*/
+	}
+	// Cuando yo uso el método merge, JPA necesita realizar un select dentro de la base de datos para poder realizar modificaciones en el proyecto. Entonces yo voy a ir a la clase producto, voy a agregar mi constructora default, generar constructor usando campo, no le voy a enviar ningún campo y voy a generar. Lo mismo para la clase categoría.
+
 	public Producto(String nombre, String descripcion, BigDecimal precio, Categoria categoria) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.categoria = categoria;
 	}
+
 	public Long getId() {
 		return id;
 	}
