@@ -3,7 +3,6 @@ package com.latam.alura.tienda.dao;
 import javax.persistence.EntityManager;
 
 import com.latam.alura.tienda.modelo.Categoria;
-//import com.latam.alura.tienda.modelo.Producto;
 
 public class CategoriaDao {
 	
@@ -25,10 +24,10 @@ public class CategoriaDao {
 		categoria=this.em.merge(categoria);
 		this.em.remove(categoria);
 	}
-
-	public Categoria consultaPorNombre(String nombre) {
-		String jpql = "SELECT C FROM Categoria AS C WHERE c.nombre = :nombre";
-		return em.createQuery(jpql, Categoria.class).setParameter("nombre", nombre).getSingleResult();
+	
+	public Categoria consultaPorNombre(String nombre){
+		String jpql =" SELECT C FROM Categoria AS C WHERE C.nombre=:nombre ";
+		return em.createQuery(jpql,Categoria.class).setParameter("nombre", nombre).getSingleResult();
 	}
 
 }

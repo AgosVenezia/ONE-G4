@@ -16,13 +16,15 @@
 		-->
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:tienda"/>
+			<!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:tienda"/>-->
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:C:\Users\Public\Alura\jpa\database"/>
 			<property name="javax.persistence.jdbc.user" value="sa"/>
-			<property name="javax.persistence.jdbc.password" value=""/>
+			<property name="javax.persistence.jdbc.password" value="1234"/>
 			
 			<property name="hibernate.show_sql" value="true"/>
 			<property name="hibernate.format_sql" value="true"/>
-			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<property name="hibernate.hbm2ddl.auto" value="create-drop"/> <!-- Crea los valores y cada vez que se ejecuta elimina los anteriores y crea los nuevos -->
+			<!--<property name="hibernate.hbm2ddl.auto" value="update"/> Si no existe, la crea. Si existe, la actualiza al valor actual -->
 			<!--
 			Vamos a crear el id, el nombre, la descripción y el precio con la propiedad hibernate.hbm2ddl.auto. Nosotros tenemos algunos valores para esta propiedad. El primer valor es create, el cual indica que va a crear la base de datos, que va a crear las tablas, las columnas, va a insertar los valores y después de que haya finalizado la aplicación él va a dejar esos valores en la base de datos. Ellos van a permanecer ahí diferentemente que la aplicación esté corriendo o no. Vamos a tener create-drop, él va a crear la base de datos, va a agregar los valores y una vez que haya finalizado la aplicación va a eliminar todos los valores tanto de las tablas como de la base de datos. Vamos a tener otro valor que es validate, que no crea ni actualiza valores, simplemente verifica que los valores sean correctos, que existan esos valores, pero no agrega nuevos valores dentro de la base datos, solamente para consulta. Y tenemos “update”, que él crea la tabla en caso de que no exista y en caso de que exista él realiza las operaciones y si está faltando un nuevo elemento, él lo crea, y luego de que finaliza la aplicación, estos valores permanecen dentro de la base de datos. Ese va a ser el valor que nosotros vamos a dejar para la construcción.
 			-->
