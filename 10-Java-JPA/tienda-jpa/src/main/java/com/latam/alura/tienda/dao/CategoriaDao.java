@@ -26,9 +26,10 @@ public class CategoriaDao {
 		this.em.remove(categoria);
 	}
 
-	public Categoria consultaPorNombre(String nombre) {
-		String jpql = "SELECT C FROM Categoria AS C WHERE c.nombre = :nombre";
-		return em.createQuery(jpql, Categoria.class).setParameter("nombre", nombre).getSingleResult();
+	public Categoria consultaPorNombre(String nombre){
+		String jpql =" SELECT C FROM Categoria AS C WHERE C.nombre=:nombre ";
+		//String jpql =" SELECT P FROM Categoria AS P WHERE P.nombre=:nombre ";
+		return em.createQuery(jpql,Categoria.class).setParameter("nombre", nombre).getSingleResult();
 	}
 
 }

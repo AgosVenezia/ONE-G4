@@ -8,6 +8,8 @@ public class RelatorioDeVenta {
 	private Long CantidadDeProducto;
 	private LocalDate FechaDeUltimaVenta;
 	
+	// El constructor realiza la consulta en RelatorioDeVenta
+	// La clase DTO debe contener un constructor compatible con consultas JPQL. JPA crea instancias de la clase DTO a través de un constructor que recibe parámetros, según la consulta JPQL.
 	public RelatorioDeVenta(String nombreDelProducto, Long cantidadDeProducto, LocalDate fechaDeUltimaVenta) {
 		this.nombreDelProducto = nombreDelProducto;
 		CantidadDeProducto = cantidadDeProducto;
@@ -39,12 +41,10 @@ public class RelatorioDeVenta {
 	}
 
 	@Override
+	// toString imprime atributos, de lo contrario posición en memoria
 	public String toString() {
 		return "RelatorioDeVenta [nombreDelProducto=" + nombreDelProducto + ", CantidadDeProducto=" + CantidadDeProducto
 				+ ", FechaDeUltimaVenta=" + FechaDeUltimaVenta + "]";
 	}
-	
-	
-	
 
 }

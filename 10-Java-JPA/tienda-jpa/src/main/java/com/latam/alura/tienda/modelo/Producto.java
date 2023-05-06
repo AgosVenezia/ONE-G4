@@ -5,14 +5,17 @@ import java.time.LocalDate;
 
 //import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 //import javax.persistence.EnumType;
 //import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+@SuppressWarnings("all")
 /*
 La anotación @Entity se puede importar de Java-persistence o de hibernate-annotation. Como nosotros queremos permanecer ágiles y dinámicos, tenemos que mantenernos con la especificación y no con la implementación. Si nosotros nos mantenemos con la implementación que sería Hibernate a la hora de cambiar Hibernate por alguna otra implementación, por algún otro framework, sería muy difícil, ya que tendríamos que cambiar varios elementos dentro de nuestro proyecto. Entonces nosotros, vamos a seleccionar java-persistence.
 */
@@ -21,6 +24,8 @@ La anotación @Entity se puede importar de Java-persistence o de hibernate-annot
 /*
 Hibernate y JPA realizan un mapeamento de los elementos existentes en nuestra clase para compararlos con el modelo en la base de datos, entonces por default se entiende que el nombre de la clase es el mismo nombre que existe para la tabla. En nuestro caso no lo es: el nombre de esta clase es la clase producto y la clase en la base de datos es productos en plural. Entonces, para indicar esa diferencia, vamos a usar otra anotación que va a ser @Table. Y esa anotación, va a pedir un parámetro a ser @Table(name=”productos”).
 */
+// Las NamedQueries son consultas que se declaran en la clase de entidad.
+@NamedQuery(name="Producto.consultaDePrecio", query = "SELECT P.precio FROM Producto AS P WHERE P.nombre=:nombre")
 public class Producto{
 
 	/*
@@ -42,7 +47,7 @@ public class Producto{
 	//@Enumerated(EnumType.STRING)
 	// No es recomendable guardar los números o un valor numérico en la base de datos ya que estos pueden ser alterados. Entonces, para darle más significancia a lo que está haciendo persistir, se guarda la palabra como string. Para eso, se utiliza la anotación de JPA @Enumerate. Esa anotación tiene un parámetro (EnumType) del tipo string que nos permite guardar la palabra que está siendo registrada en el enumerador.
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Categoria categoria;
 	// Siempre que exista la relación entre dos entidades o dos tablas se utiliza una anotación de JPA que es la anotación many to one o one to one, dependiendo del tipo de tipo de relación existente entre esas entidades. En este caso, nosotros vamos a tener que muchos productos están relacionados con una única categoría, por lo que utilizaremos la anotación @ManyToOne, que es muchos productos tienen una única categoría. Esto le va a permitir al cliente agregar diversos elementos de categorías que van a estar relacionados con la clase producto.
 	
@@ -62,9 +67,9 @@ public class Producto{
 		return id;
 	}
 
-	public void setId(Long id) {
+	/*public void setId(Long id) {
 		this.id = id;
-	}
+	}*/
 
 	public String getNombre() {
 		return nombre;

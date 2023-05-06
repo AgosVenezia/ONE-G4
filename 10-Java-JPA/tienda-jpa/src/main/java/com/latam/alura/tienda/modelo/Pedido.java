@@ -27,9 +27,12 @@ public class Pedido {
 	private Long id;
 	private LocalDate fecha=LocalDate.now();
 	//@Column(name="valor_total")
-	private BigDecimal valorTotal;/*=new BigDecimal(0);*/
+	private BigDecimal valorTotal=new BigDecimal(0); // De esta forma, no es necesario agregar un DAO
 	
-	@ManyToOne /*(fetch=FetchType.LAZY)*/
+	// Elementos ToOne - Eager - Estrategia de carga anticipada - Hacen JOIN con todos los atributos que tienen esas anotaciones
+	// Elemetos ToMany - Lazy - Generalmente listas - Llama a los elementos solo cuando son solicitados
+	// ¿Por qué es interesante utilizar el recurso JOIN FETCH en una consulta JPQL? Para evitar cargar relaciones en todas las consultas de aplicaciones. JOIN FETCH permite elegir qué relaciones se cargarán en una consulta determinada, en lugar de cargarlas siempre.
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Cliente cliente;
 
 	/*@ManyToMany // Un pedido puede tener muchos productos y ese producto puede estar en muchos pedidos.

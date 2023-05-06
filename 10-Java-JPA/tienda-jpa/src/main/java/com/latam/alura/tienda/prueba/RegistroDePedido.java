@@ -43,12 +43,22 @@ public class RegistroDePedido {
 		
 		em.getTransaction().commit();
 		
-		//BigDecimal valorTotal=pedidoDao.valorTotalVendido();
-		//System.out.println("Valor Total: "+ valorTotal);
+		BigDecimal valorTotal=pedidoDao.valorTotalVendido();
+		System.out.println("Valor Total: "+ valorTotal);
+
+		// OPCIÓN OBJECT
+		/*List<Object[]> relatorio = pedidoDao.relatorioDeVentas();
+
+		for (Object[] obj : relatorio) {
+			System.out.println(obj[0]);
+			System.out.println(obj[1]);
+			System.out.println(obj[2]);
+		}*/
 		
-		//List<RelatorioDeVenta> relatorio = pedidoDao.relatorioDeVentasVO();
+		// OPCIÓN VO
+		List<RelatorioDeVenta> relatorio = pedidoDao.relatorioDeVentasVO();
 		
-		//relatorio.forEach(System.out::println);
+		relatorio.forEach(System.out::println);
 		
 	}
 

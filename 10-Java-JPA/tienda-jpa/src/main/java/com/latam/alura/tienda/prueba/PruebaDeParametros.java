@@ -1,4 +1,4 @@
-/*package com.latam.alura.tienda.prueba;
+package com.latam.alura.tienda.prueba;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -50,4 +50,3 @@ public class PruebaDeParametros {
 		em.close();
 	}
 }
-*/

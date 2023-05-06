@@ -23,10 +23,10 @@ public class ItemsPedido {
 	//@Column(name="precio_unitario")
 	private BigDecimal precioUnitario;
 	
-	@ManyToOne /*(fetch=FetchType.LAZY)*/
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Producto producto;
 	
-	@ManyToOne /*(fetch=FetchType.LAZY)*/
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Pedido pedido;
 
 	// Un pedido con diferentes productos - ManyToOne

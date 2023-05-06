@@ -1,4 +1,4 @@
-/*package com.latam.alura.tienda.prueba;
+package com.latam.alura.tienda.prueba;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -102,4 +102,3 @@ public class LoadRecords {
 
 	
 }
-*/
