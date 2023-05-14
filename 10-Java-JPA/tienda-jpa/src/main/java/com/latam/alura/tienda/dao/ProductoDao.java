@@ -3,12 +3,13 @@ package com.latam.alura.tienda.dao;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.function.Predicate;
+//import java.util.function.Predicate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 //import com.latam.alura.tienda.modelo.Categoria;
@@ -68,12 +69,15 @@ public class ProductoDao {
 		return em.createNamedQuery("Producto.consultaDePrecio", BigDecimal.class).setParameter("nombre", nombre).getSingleResult();
 	}
 
+	// Más de un parámetro de filtrado
+	// Cuando queremos realizar consultas con múltiples parámetros nos encontramos con el problemas que todos ellos deben ser obligatorios, de lo contrario consultaria elementos nulos en tabla. Para evitar este error tenemos que usar parámetros dinámicos que nos permiten realizar consultas con múltiples parámetros y en caso de que alguno de estos sea nulo la consulta simplemente ignorará este parámetro y realizará la consulta con los parámetros existentes. Y en caso de no existir ningún parámetro, realizará la consulta de todos los elementos en la tabla.
 	public List<Producto> consultarPorParametros(String nombre, BigDecimal precio, LocalDate fecha) {
-		/*String jpql="SELECT P FROM Producto P WHERE 1=1 "
+		/*String jpql="SELECT P FROM Producto P WHERE 1=1 " // 1=1 es true y continúa con la consulta
 			//+ "P.nombre=:nombre "
 			//+ "AND P.precio=:precio "
-			+ "AND P.fechaDeRegistro=:fecha";*/
+			+ "AND P.fechaDeRegistro=:fecha";*/ // Nombre igual que parámetro.
 		StringBuilder jpql = new StringBuilder("SELECT p FROM Producto p WHERE 1=1 ");
+		// El String es inmutable, con el Builder es mutable, lo podemos modificar.
 			
 			if (nombre != null && !nombre.trim().isEmpty()) {
 				jpql.append("AND p.nombre=:nombre ");
@@ -98,6 +102,9 @@ public class ProductoDao {
 			return query.getResultList();
 		}
 
+	// Adicionalmente podemos realizar la misma consulta dinámica utilizando la API de Criteria que es un poco más compleja y recomendamos documentarse sobre ella pero simplifica la cantidad de condiciones en nuestra aplicación.
+	// API de criterio: nos permite construir nuestra consulta a través del método
+	// ¿Cuál de las siguientes es una desventaja de Criteria API? Código más complejo de entender y mantener.
 	public List<Producto> consultarPorParametrosConAPICriteria(String nombre, BigDecimal precio, LocalDate fecha) {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Producto> query = builder.createQuery(Producto.class);

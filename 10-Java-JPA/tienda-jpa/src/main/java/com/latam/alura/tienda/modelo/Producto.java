@@ -11,9 +11,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import javax.persistence.InheritanceType;
 
 @SuppressWarnings("all")
 /*
@@ -26,6 +29,10 @@ Hibernate y JPA realizan un mapeamento de los elementos existentes en nuestra cl
 */
 // Las NamedQueries son consultas que se declaran en la clase de entidad.
 @NamedQuery(name="Producto.consultaDePrecio", query = "SELECT P.precio FROM Producto AS P WHERE P.nombre=:nombre")
+//@Inheritance(strategy=InheritanceType.SINGLE_TABLE) // La anotación @Inheritance solo debe agregarse en la clase base.
+@Inheritance(strategy=InheritanceType.JOINED)
+// SINGLE_TABLE conecta las entidades en una única tabla con todos los atributos. Mayor desempeño.
+// JOIN tablas separadas. Menor desempeño pero elementos organizados con llave primaria, distribución entre entidades.
 public class Producto{
 
 	/*

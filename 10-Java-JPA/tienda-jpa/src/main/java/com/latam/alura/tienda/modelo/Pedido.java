@@ -31,6 +31,7 @@ public class Pedido {
 	
 	// Elementos ToOne - Eager - Estrategia de carga anticipada - Hacen JOIN con todos los atributos que tienen esas anotaciones
 	// Elemetos ToMany - Lazy - Generalmente listas - Llama a los elementos solo cuando son solicitados
+	// Cuando realizamos consultas con la anotación @ManyToOne o @OneToOne detrás de escena JPA aplica una estrategia de cargamento de información llamada Eager o Anticipada o Proactiva realizando JOINS entre tablas. Pero no acaba allí, ya que si esa entidad que tiene el JOIN, tiene otras entidades dentro de sus atributos marcados con la anotación finalizando ToOne, también serán cargadas dentro de la consulta. Esto puede saturar la memoria y afectar seriamente la velocidad de carga, ya para corregir debemos utilizar el parámetro de carga FerchType.LAZY en todas las anotaciones ToOne que le indica a JPA solo cargar la entidad si es solicitada. Al realizar esta corrección se presenta un posible inconveniente donde nos encontremos con la necesidad de utilizar ese atributo de entidad. Pero para ese momento ya el EntityManager se puede encontrar cerrado, por lo que tenemos que planear nuestras consultas previniendo, el uso de esa entidad aún cuando se encuentre cerrado el EntityManager.
 	// ¿Por qué es interesante utilizar el recurso JOIN FETCH en una consulta JPQL? Para evitar cargar relaciones en todas las consultas de aplicaciones. JOIN FETCH permite elegir qué relaciones se cargarán en una consulta determinada, en lugar de cargarlas siempre.
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Cliente cliente;

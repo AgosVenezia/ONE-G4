@@ -14,17 +14,20 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String nombre;
-	private String dni;
+	//private String nombre;
+	//private String dni;
 	
-	/*@Embedded
-	private DatosPersonales datosPersonales;*/
+	// DatosPersonales es una clase para atributos que se inyecta en la clase Cliente
+	// La clase DatosPersonales está siendo inyectada dentro del atributo datosPersonales
+	@Embedded
+	private DatosPersonales datosPersonales;
 	
 	public Cliente() {}
 	
 	public Cliente(String nombre, String dni) {
-		//this.datosPersonales=new DatosPersonales(nombre,dni);
-		this.nombre = nombre;
+		this.datosPersonales=new DatosPersonales(nombre,dni);
+		//this.nombre = nombre;
+		//this.dni = dni;
 	}
 
 	public Long getId() {
@@ -32,23 +35,23 @@ public class Cliente {
 	}
 
 	public String getNombre() {
-		//return datosPersonales.getNombre();
-		return nombre;
+		return datosPersonales.getNombre();
+		//return nombre;
 	}
 
 	public void setNombre(String nombre) {
-		//this.datosPersonales.setNombre(nombre);
-		this.nombre = nombre;
+		this.datosPersonales.setNombre(nombre);
+		//this.nombre = nombre;
 	}
 
 	public String getDni() {
-		//return datosPersonales.getDni();
-		return dni;
+		return datosPersonales.getDni();
+		//return dni;
 	}
 
 	public void setDni(String dni) {
-		//this.datosPersonales.setDni(dni);
-		this.dni = dni;
+		this.datosPersonales.setDni(dni);
+		//this.dni = dni;
 	}
 
 }

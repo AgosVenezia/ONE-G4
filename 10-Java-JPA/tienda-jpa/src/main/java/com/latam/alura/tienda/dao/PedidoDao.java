@@ -108,6 +108,7 @@ public class PedidoDao {
 		return em.createQuery(jpql,RelatorioDeVenta.class).getResultList();
 	}
 	
+	// Consulta planeada: ya planificamos que elementos vamos a obtener y los almacenamos en variables. JOIN FETCH nos permite hacer un join con la entidad deseada. Sólo para esa consulta pasa de Lazy a Eager.
 	public Pedido consultarPedidoConCliente(Long id) {
 		String jpql="SELECT p FROM Pedido p JOIN FETCH p.cliente WHERE p.id=:id";
 		return em.createQuery(jpql,Pedido.class).setParameter("id", id).getSingleResult();
