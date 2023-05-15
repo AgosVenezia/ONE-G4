@@ -18,7 +18,6 @@ import com.latam.alura.tienda.modelo.Pedido;
 import com.latam.alura.tienda.modelo.Producto;
 import com.latam.alura.tienda.utils.JPAUtils;
 
-
 public class LoadRecords {
 	public static void cargarRegistros() throws FileNotFoundException {
 		EntityManager em = JPAUtils.getEntityManager();
@@ -100,5 +99,4 @@ public class LoadRecords {
 		return pedido;
 	}
 
-	
 }

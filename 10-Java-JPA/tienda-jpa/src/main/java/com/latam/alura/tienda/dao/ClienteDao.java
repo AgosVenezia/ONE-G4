@@ -1,6 +1,5 @@
 package com.latam.alura.tienda.dao;
 
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -19,7 +18,6 @@ public class ClienteDao {
 	public void guardar(Cliente cliente) {
 		this.em.persist(cliente);
 	}
-	
 	
 	public void actualizar(Cliente cliente) {
 		this.em.merge(cliente);

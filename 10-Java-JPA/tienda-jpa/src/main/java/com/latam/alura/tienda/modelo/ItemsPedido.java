@@ -2,7 +2,7 @@ package com.latam.alura.tienda.modelo;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
+//import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -85,6 +85,5 @@ public class ItemsPedido {
 	public BigDecimal getValor() {
 		return this.precioUnitario.multiply(new BigDecimal(this.cantidad));
 	}
-
 
 }

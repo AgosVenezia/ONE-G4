@@ -5,9 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class DatosPersonales implements Serializable{
+public class DatosPersonales implements Serializable {
 
-	//private static final long serialVersionUID = 8063180201812979106L;
+	private static final long serialVersionUID = 8063180201812979106L;
 	
 	private String nombre;
 	private String dni;

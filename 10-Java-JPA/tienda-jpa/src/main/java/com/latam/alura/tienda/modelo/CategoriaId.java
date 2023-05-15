@@ -9,7 +9,7 @@ import javax.persistence.Embeddable;
 public class CategoriaId implements Serializable {
 // Elementos serializados en bits para transitar en nuestra app.
 
-	//private static final long serialVersionUID = 4198020985304539350L;
+	private static final long serialVersionUID = 4198020985304539350L;
 	
 	// Llave compuesta de míltiples parámetros (nombre, password)
 	private String nombre;

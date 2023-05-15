@@ -21,7 +21,6 @@ public class PedidoDao {
 		this.em.persist(pedido);
 	}
 	
-	
 	public void actualizar(Pedido pedido) {
 		this.em.merge(pedido);
 	}
@@ -94,7 +93,7 @@ public class PedidoDao {
 		return em.createQuery(jpql,Object[].class).getResultList();
 	}
 	
-	// OPCIÓN VO
+	// OPCIÓN VO - Entidades utilitarias que contienen los atributos de esa consulta
 	public List<RelatorioDeVenta> relatorioDeVentasVO(){
 		// new permite utilizar lenguaje Java en consultas SQL
 		String jpql="SELECT new com.latam.alura.tienda.vo.RelatorioDeVenta(producto.nombre, "
@@ -108,6 +107,7 @@ public class PedidoDao {
 		return em.createQuery(jpql,RelatorioDeVenta.class).getResultList();
 	}
 	
+	// OPCIÓN JOIN FETCH - Consultas planeadas para cuando el em se encuentra cerrada
 	// Consulta planeada: ya planificamos que elementos vamos a obtener y los almacenamos en variables. JOIN FETCH nos permite hacer un join con la entidad deseada. Sólo para esa consulta pasa de Lazy a Eager.
 	public Pedido consultarPedidoConCliente(Long id) {
 		String jpql="SELECT p FROM Pedido p JOIN FETCH p.cliente WHERE p.id=:id";
